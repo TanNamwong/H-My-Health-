@@ -1,300 +1,192 @@
 <!doctype html>
-<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#24497e"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="H My Health"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon-192.png"><link rel="apple-touch-icon" href="./icon-maskable-192.png"><title>H My Health</title>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#0868c8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="H My Health"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/svg+xml" href="./icon.svg"><link rel="icon" type="image/png" sizes="64x64" href="./favicon-64.png"><link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png"><title>H My Health</title>
 <style>
-/* ==========================================================
-   H My Health — Navy · Teal · Gold theme (V12)
-   ========================================================== */
-:root{
- --navy:#24497e;--navy-d:#1c3a66;--blue:#2c5c9a;--teal:#3a7a93;--gold:#cfa551;--gold-l:#f1d08a;--gold-bg:#fbf3df;
- --green:#3c8766;--green-d:#2f6f52;--green-bg:#e4f2ea;--red:#c4524f;--red-bg:#fbeceb;--amber:#c98a2b;--amber-bg:#fdf2de;
- --bg:#f4f8fb;--card:#fff;--line:#dbe6f0;--line-2:#e8eff6;--ink:#1e3a66;--text:#34506f;--muted:#5f7694;--chip:#e8f0f8;
- --shadow:0 6px 20px rgba(36,73,126,.08);--shadow-s:0 2px 8px rgba(36,73,126,.07);
- --nav-h:74px;
-}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Thai","Sarabun","Leelawadee UI",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
-button,input,select,textarea{font-family:inherit}
-h2,h3,h4{color:var(--ink);line-height:1.3}
-.hidden{display:none}
+*{box-sizing:border-box}body{margin:0;background:#f2f6fb;color:#172536;font-family:Arial,sans-serif;font-size:19px}
+header{background:#0868c8;color:white;padding:20px 18px 18px;border-radius:0 0 22px 22px}
+h1{font-size:27px;margin:0 0 5px}header p{margin:0;font-size:19px;font-weight:700;line-height:1.4}.header-date{padding-top:5px}
+main{padding:14px;max-width:650px;margin:auto}.date{background:#e4f7e7;padding:15px;border-radius:16px;font-weight:bold;margin-bottom:12px}
+.card{background:white;border-radius:17px;padding:15px;margin:11px 0;box-shadow:0 2px 7px #17324d12}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px}.label{font-size:18px;font-weight:bold}.value{font-size:30px;font-weight:bold;margin-top:5px}
+.sub{font-size:15px;color:#586779}.tag{font-size:15px;padding:5px 9px;border-radius:9px;background:#eaf2ff}
+button{border:0;border-radius:14px;padding:15px 18px;font-size:20px;font-weight:bold;cursor:pointer}
+.primary{background:#0ab64b;color:white;width:100%;margin:8px 0}.blue{background:#0868c8;color:white}.light{background:#e8eef6;color:#172536}
+nav{display:flex;gap:8px;margin-top:12px}nav button{flex:1;font-size:16px;padding:12px 4px}
+input,select{width:100%;font-size:20px;padding:13px;border:2px solid #d7e0eb;border-radius:12px;margin:6px 0 13px;background:white}
+label{font-weight:bold;display:block;margin-top:8px}.hidden{display:none}.alert{background:#fff0f0;border-left:7px solid #e53935}.ok{color:#16833d}.warn{color:#c36a00}.bad{color:#c62828}
+h2{font-size:23px;margin:4px 0 12px}.history-item{border-bottom:1px solid #e6edf4;padding:10px 0;font-size:17px}
+.small{font-size:14px;color:#64748b;line-height:1.5}
 
-/* ---------- Header ---------- */
-header{position:relative;text-align:center;color:#fff;overflow:hidden;
- padding:calc(22px + env(safe-area-inset-top)) 18px 26px;border-radius:0 0 30px 30px;border-bottom:4px solid var(--gold);
- background:linear-gradient(120deg,#24497e 0%,#2c5c9a 55%,#3a7a93 100%);box-shadow:0 8px 22px rgba(36,73,126,.22)}
-header::before,header::after{content:"✦";position:absolute;color:var(--gold-l);opacity:.85}
-header::before{left:7%;top:42%;font-size:20px}header::after{right:8%;top:26%;font-size:13px}
-.brand{display:flex;align-items:center;justify-content:center;gap:11px}
-.brand img{width:46px;height:46px;border-radius:14px;box-shadow:0 3px 10px rgba(0,0,0,.25)}
-header h1{margin:0;font-size:28px;font-weight:800;letter-spacing:.2px;line-height:1.15}
-.brand-sub{margin:5px 0 0;font-size:13.5px;font-weight:500;opacity:.92}
-.header-date{display:inline-block;margin:11px 0 0;padding:5px 15px;border-radius:99px;background:rgba(255,255,255,.14);border:1px solid rgba(241,208,138,.55);font-size:13.5px;font-weight:600;color:#fff}
+.report-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.report-tile{background:#f3f7fc;border-radius:12px;padding:12px;min-width:0}
+.report-tile b{display:block;font-size:24px;margin-top:4px;overflow-wrap:anywhere}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.toolbar button{flex:1;min-width:130px}
+canvas{width:100%;height:175px;display:block;background:#fff;border:1px solid #e4eaf1;border-radius:12px}
+@media print{header,nav,.no-print,button{display:none!important}body{background:#fff;font-size:13px}main{max-width:none;padding:0}.card{box-shadow:none;border:1px solid #ddd;break-inside:avoid}#reportView{display:block!important}.hidden{display:none!important}.report-grid{grid-template-columns:repeat(3,minmax(0,1fr))}canvas{max-height:150px}}
 
-main{padding:16px 15px calc(var(--nav-h) + 34px + env(safe-area-inset-bottom));max-width:760px;margin:auto}
-
-/* ---------- Bottom navigation ---------- */
-nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(100%,760px);z-index:50;
- display:grid;grid-template-columns:repeat(5,1fr);align-items:end;gap:2px;
- padding:8px 8px calc(8px + env(safe-area-inset-bottom));background:#fff;border-radius:26px 26px 0 0;border-top:1px solid var(--line);
- box-shadow:0 -8px 28px rgba(36,73,126,.13)}
-.nav-btn{appearance:none;border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
- min-height:56px;padding:6px 2px;border-radius:17px;color:var(--muted);font-size:12px;font-weight:700;cursor:pointer;position:relative;transition:background .18s,color .18s}
-.nav-btn svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.nav-btn.active{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;box-shadow:0 4px 12px rgba(36,73,126,.3)}
-.nav-btn.active::after{content:"";position:absolute;bottom:3px;width:18px;height:3px;border-radius:3px;background:var(--gold)}
-.nav-fab{margin-top:-30px;color:var(--navy)}
-.nav-fab .fab{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#f3d58f,var(--gold));border:4px solid #fff;color:var(--navy-d);box-shadow:0 6px 16px rgba(207,165,81,.55)}
-.nav-fab .fab svg{width:28px;height:28px;stroke-width:2.6}
-.nav-fab.active{background:transparent;box-shadow:none;color:var(--navy)}
-.nav-fab.active::after{display:none}
-.nav-fab.active .fab{box-shadow:0 0 0 3px rgba(36,73,126,.28),0 6px 16px rgba(207,165,81,.55)}
-
-/* ---------- Update notice ---------- */
-.update-banner{display:none;align-items:center;gap:11px;margin:12px 14px 0;max-width:732px;padding:11px 12px 11px 14px;border-radius:18px;background:linear-gradient(120deg,#fff8e6,#fbeac0);border:1.5px solid var(--gold);box-shadow:0 6px 16px rgba(207,165,81,.3)}
-@media(min-width:790px){.update-banner{margin:12px auto 0}}
-.update-banner.show{display:flex}
-.update-banner .ub-ico{font-size:24px;animation:bob 2.2s ease-in-out infinite}
-.update-banner .ub-txt{flex:1;min-width:0;font-size:13.5px;line-height:1.4;color:#6b4d0f}.update-banner .ub-txt b{display:block;font-size:15px;color:var(--navy)}
-.update-banner button{padding:10px 14px;font-size:14px;border-radius:13px;white-space:nowrap}
-.nav-badge{position:absolute;top:5px;right:calc(50% - 20px);width:11px;height:11px;border-radius:50%;background:#d6453f;border:2px solid #fff}
-.nav-badge[hidden]{display:none}
-.new-pill{margin-left:auto;background:#d6453f;color:#fff;font-size:11px;font-weight:800;border-radius:99px;padding:2px 9px}.new-pill[hidden]{display:none}
-.new-pill+.chev{margin-left:8px}
-/* ---------- More sheet ---------- */
-.sheet-backdrop{position:fixed;inset:0;z-index:60;background:rgba(18,36,66,.5);display:none;align-items:flex-end;justify-content:center}
-.sheet-backdrop.open{display:flex;animation:fade .18s}
-.sheet{width:min(100%,760px);background:#fff;border-radius:28px 28px 0 0;padding:10px 16px calc(18px + env(safe-area-inset-bottom));border-top:4px solid var(--gold);box-shadow:0 -12px 40px rgba(0,0,0,.25);animation:rise .22s ease-out}
-.sheet-grip{width:44px;height:5px;border-radius:5px;background:#cfdbe8;margin:4px auto 12px}
-.sheet h3{margin:0 4px 10px;font-size:18px}
-.sheet-item{width:100%;display:flex;align-items:center;gap:13px;text-align:left;border:0;background:transparent;padding:11px 8px;border-radius:16px;cursor:pointer;color:var(--ink)}
-.sheet-item:active,.sheet-item.current{background:var(--chip)}
-.sheet-ico{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:var(--chip);flex:0 0 auto}
-.sheet-ico svg{width:24px;height:24px;stroke:var(--navy);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.sheet-item b{display:block;font-size:16px;font-weight:700}.sheet-item small{display:block;font-size:12.5px;color:var(--muted);font-weight:400}
-.sheet-item .chev{margin-left:auto;color:#9bb0c8;font-size:22px}
-@keyframes rise{from{transform:translateY(40px);opacity:.6}to{transform:none;opacity:1}}@keyframes fade{from{opacity:0}to{opacity:1}}
-
-/* ---------- Generic ---------- */
-.card{background:var(--card);border:1px solid var(--line-2);border-radius:20px;padding:16px;margin:12px 0;box-shadow:var(--shadow)}
-.row{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.label{font-size:15px;font-weight:700;color:var(--navy)}
-.value{font-size:28px;font-weight:800;line-height:1.2;color:var(--ink);margin-top:6px}
-.sub,.small{color:var(--muted)}.sub{font-size:14px}.small{font-size:13px;line-height:1.55}
-.tag{font-size:12px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--chip);color:var(--blue)}
-.ok{color:var(--green)}.warn{color:var(--amber)}.bad{color:var(--red)}
-
-button{border:0;border-radius:15px;padding:14px 18px;font-size:16px;font-weight:700;cursor:pointer;transition:transform .08s,filter .15s}
-button:active{transform:scale(.98)}
-button:disabled{opacity:.6}
-.primary{background:linear-gradient(135deg,#3c8766,#2f7456);color:#fff;width:100%;margin:8px 0;box-shadow:0 5px 14px rgba(60,135,102,.28)}
-.blue{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;box-shadow:0 5px 14px rgba(36,73,126,.22)}
-.light{background:#fff;color:var(--navy);border:1.5px solid var(--line)}
-:focus-visible{outline:3px solid rgba(207,165,81,.65);outline-offset:2px}
-
-label{display:block;font-weight:700;font-size:14px;color:var(--navy);margin-top:6px}
-input,select,textarea{width:100%;font-size:17px;padding:13px;border:1.5px solid #cfdceb;border-radius:14px;margin:6px 0 12px;background:#fbfdff;color:var(--ink)}
-textarea{resize:vertical;line-height:1.5}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(44,92,154,.14)}
-input[type=checkbox]{width:auto}
-canvas{width:100%;height:175px;display:block;background:#fff;border:1px solid var(--line-2);border-radius:12px}
-
-/* page headings */
-.page-intro{padding:6px 4px 10px}
-.page-intro .eyebrow{display:inline-block;font-size:11px;letter-spacing:1.6px;font-weight:800;color:#a9802f;background:var(--gold-bg);padding:3px 10px;border-radius:99px}
-.page-intro h2{font-size:24px;margin:7px 0 2px}
-.page-intro p{font-size:14px;color:var(--muted);margin:0}
-.home-section-title{font-size:17px;font-weight:800;color:var(--navy);margin:20px 3px 8px;display:flex;align-items:center;gap:8px}
-.home-section-title::before{content:"";width:5px;height:18px;border-radius:4px;background:var(--gold)}
-
-/* ---------- Home ---------- */
-.summary-pill{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;padding:12px 16px;margin:2px 0 12px;border-radius:99px;
- background:linear-gradient(135deg,#3c8766,#47936f);color:#fff;font-weight:800;font-size:15px;border:2px solid var(--gold);box-shadow:0 6px 16px rgba(60,135,102,.25)}
-.profile-card{display:flex;align-items:center;gap:13px;background:linear-gradient(120deg,#fff 0%,#eef4fb 100%);padding:13px 15px}
-.profile-avatar{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,var(--navy),var(--teal));box-shadow:0 4px 10px rgba(36,73,126,.25);flex:0 0 auto}
-.profile-info{min-width:0;flex:1}.profile-info .label{font-size:13px;color:var(--muted);font-weight:600}
-#homeProfile{font-size:16px;font-weight:700;color:var(--ink);overflow-wrap:anywhere}
-.chip-btn{padding:8px 14px;font-size:13px;border-radius:99px;background:var(--chip);color:var(--navy);border:1px solid var(--line)}
-.home-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:10px 0}
-.home-metrics .card{margin:0;min-width:0;padding:14px;border-radius:19px;position:relative;overflow:hidden}
-.home-metrics .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent,var(--blue))}
-.home-metrics .span2{grid-column:1/-1}
-.m-top{display:flex;align-items:center;gap:9px}
-.m-ico{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-size:18px;background:var(--accent-bg,var(--chip));flex:0 0 auto}
-.home-metrics .label{font-size:13.5px;line-height:1.3;flex:1;min-width:0}
-.home-metrics .value{font-size:26px;margin-top:10px;overflow-wrap:anywhere}
-.home-metrics .span2 .value{font-size:30px}
-.m-bp{--accent:#c4524f;--accent-bg:#fbeceb}.m-pulse{--accent:#d9893a;--accent-bg:#fdf0e0}.m-spo{--accent:#2c5c9a;--accent-bg:#e6eef8}
-.m-resp{--accent:#6f6bb3;--accent-bg:#eeedf8}.m-glu{--accent:#cfa551;--accent-bg:#fbf3df}.m-temp{--accent:#3c8766;--accent-bg:#e4f2ea}
-.m-weight{--accent:#3a7a93;--accent-bg:#e3f1f5}.m-height{--accent:#24497e;--accent-bg:#e8f0f8}
-.home-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
-.home-actions button{margin:0;min-height:54px;font-size:15.5px;padding:12px}
-.alert-card{border-left:5px solid var(--gold);background:#fff}
-#alerts{font-size:14.5px;line-height:1.6}
-.foot-note{text-align:center;margin:18px 6px 0}
-
-/* ---------- Forms ---------- */
-.form-card,.settings-card{background:#fff;border:1px solid var(--line-2);border-radius:20px;padding:17px;margin:12px 0;box-shadow:var(--shadow)}
-.form-title,.settings-title{display:flex;align-items:center;gap:12px;margin-bottom:12px}
-.form-title h3,.settings-title h3,.report-controls h3,.report-section h3{font-size:17px;margin:0;color:var(--navy)}
-.form-title p,.settings-title p{font-size:12.5px;color:var(--muted);margin:2px 0 0}
-.form-icon,.settings-icon{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--chip);font-size:22px;flex:0 0 auto}
-.pulse-form{border-top:4px solid #d9893a}.bp-form{border-top:4px solid #c4524f}.oxygen-form{border-top:4px solid #2c5c9a}.glucose-form{border-top:4px solid #cfa551}.temp-form{border-top:4px solid #3c8766}
-.field-grid,.settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 12px}.full-field{grid-column:1/-1}
-.form-card label small{font-weight:500;color:var(--muted)}
-.entry-submit{margin:16px 0 8px}.entry-submit .primary{min-height:56px;font-size:17px}.entry-submit .small{text-align:center;margin-top:10px}
-.entry-submit .light{width:100%}
-.settings-field label{font-size:13px;margin-top:6px}.settings-field input{margin:5px 0 9px}
-.settings-hint{font-size:13px;line-height:1.55;color:var(--muted);background:#f3f7fb;border-radius:12px;padding:10px 12px;margin:7px 0 0}
-.settings-actions{margin:14px 0 8px}.settings-actions button{min-height:54px;margin:7px 0;width:100%}
-.med-editor{background:#f5f9fc;border:1px solid var(--line-2);border-radius:16px;padding:14px;margin-top:12px}
-.med-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px}.med-fields .wide{grid-column:1/-1}
-.med-list{display:flex;flex-direction:column;gap:10px;margin-top:12px}
-.med-item,.appt-item{border:1px solid var(--line);border-radius:16px;padding:13px;background:#fff}
-.med-item-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
-.med-item h4,.appt-item h4{margin:0 0 4px;font-size:16.5px}
-.med-time{display:inline-flex;background:var(--chip);color:var(--navy);border-radius:10px;padding:5px 10px;margin:6px 5px 0 0;font-size:13.5px;font-weight:700}
-.med-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.med-actions button{font-size:13px;padding:9px 12px}
-.med-empty,.history-empty{padding:18px;text-align:center;background:#f5f9fc;border:1px dashed #c9d8e8;border-radius:14px;color:var(--muted);font-size:14.5px}
-.appt-meta{font-size:14px;color:var(--text);line-height:1.7;margin-bottom:8px}
-
-/* ---------- History ---------- */
-.history-list{display:flex;flex-direction:column;gap:14px}
-.history-record{background:#fff;border:1px solid var(--line-2);border-radius:20px;padding:16px;box-shadow:var(--shadow)}
-.history-record-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;padding-bottom:10px;border-bottom:1px dashed var(--line)}
-.history-record-date{font-size:16.5px;font-weight:800;color:var(--navy)}
-.history-record-time{font-size:13px;color:var(--navy);font-weight:700;background:var(--gold-bg);padding:3px 11px;border-radius:99px}
-.history-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.metric-box{border-radius:14px;padding:11px 10px;min-width:0;border-left:5px solid transparent}
-.metric-box .metric-label{font-size:13px;font-weight:700;line-height:1.35}
-.metric-box .metric-value{font-size:23px;font-weight:800;line-height:1.25;margin-top:4px;overflow-wrap:anywhere}
-.metric-box .metric-unit{font-size:12px;font-weight:500}
-.metric-bp{background:#fbeceb;border-color:#c4524f;color:#8d2f2d}
-.metric-pulse-bp{background:#fdf0e0;border-color:#d9893a;color:#8a5014}
-.metric-spo{background:#e6eef8;border-color:#2c5c9a;color:#1d4a80}
-.metric-resp{background:#eeedf8;border-color:#6f6bb3;color:#46428a}
-.metric-glucose{background:#fbf3df;border-color:#cfa551;color:#7a5a14}
-.metric-temp{background:#e4f2ea;border-color:#3c8766;color:#245a42}
-.metric-weight{background:#e3f1f5;border-color:#3a7a93;color:#235a6e}
-.metric-height{background:#e8f0f8;border-color:#24497e;color:#24497e}
-.metric-bmi{background:#f1f4f8;border-color:#7d8fa8;color:#41536b}
-.history-note{margin-top:12px;padding:10px 12px;border-radius:12px;background:#f3f7fb;color:var(--text);font-size:14.5px}
-.record-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.record-actions button{padding:9px 14px;font-size:13px;flex:1}
-
-/* ---------- Report ---------- */
-.report-controls{padding:17px}.report-controls h3{margin-bottom:8px}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.toolbar button{flex:1;min-width:130px;margin:0}
-.report-section{margin:20px 0}.report-section h3{margin:0 0 10px}
-.report-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.report-tile{background:#fff;border:1px solid var(--line-2);border-top:3px solid var(--gold);border-radius:16px;padding:13px;min-width:0;box-shadow:var(--shadow-s)}
-.report-tile span{font-size:13px}.report-tile b{display:block;font-size:20px;margin-top:4px;color:var(--navy);overflow-wrap:anywhere}
-.report-reading{background:#fff;border:1px solid var(--line-2);border-radius:18px;padding:14px;margin:10px 0;box-shadow:var(--shadow-s)}
-.report-reading-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;font-weight:800;color:var(--navy)}
-.report-reading-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.report-value{padding:10px;border-radius:12px;background:#f3f7fb;min-width:0}.report-value b{display:block;font-size:20px;color:var(--navy);overflow-wrap:anywhere}.report-value span{font-size:12.5px;color:var(--muted)}
-.trend-details{background:#fff;border:1px solid var(--line-2);border-radius:18px;padding:14px;margin:18px 0;box-shadow:var(--shadow-s)}
-.trend-details summary{font-size:16px;font-weight:800;color:var(--blue);cursor:pointer;padding:3px}
-.trend-card{background:#fbfdff;border:1px solid var(--line-2);border-radius:14px;padding:12px;margin:10px 0}.trend-card b{font-size:14px;color:var(--navy)}.trend-card canvas{margin-top:8px;height:150px}
-.history-item{background:#f8fbfe;border:1px solid var(--line-2);border-radius:13px;padding:13px;margin:9px 0;line-height:1.7;font-size:14px;overflow-wrap:anywhere}
-
-/* A4 clinician summary (print) */
-.a4-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;border-bottom:2px solid var(--navy);padding-bottom:7px;margin-bottom:9px}
-.a4-head h2{font-size:21px;margin:0 0 3px;color:var(--navy)}.a4-meta{font-size:11px;color:#536273;text-align:right}
+/* One-page A4 clinician summary */
+.a4-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;border-bottom:2px solid #1d5f9f;padding-bottom:7px;margin-bottom:9px}
+.a4-head h2{font-size:21px;margin:0 0 3px}
+.a4-meta{font-size:11px;color:#536273;text-align:right}
 .a4-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:8px 0}
-.a4-stat{border:1px solid #dce5ee;border-top:2px solid var(--gold);border-radius:7px;padding:6px 8px;min-width:0}
-.a4-stat strong{display:block;font-size:11px;color:#536273}.a4-stat .latest{font-size:18px;font-weight:700;margin:2px 0}.a4-stat .range{font-size:10px;color:#526174}
+.a4-stat{border:1px solid #dce5ee;border-radius:7px;padding:6px 8px;min-width:0}
+.a4-stat strong{display:block;font-size:11px;color:#536273}
+.a4-stat .latest{font-size:18px;font-weight:700;margin:2px 0}
+.a4-stat .range{font-size:10px;color:#526174}
 .a4-charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
-.a4-chart{border:1px solid #dce5ee;border-radius:7px;padding:5px 7px;break-inside:avoid}.a4-chart b{font-size:11px}
+.a4-chart{border:1px solid #dce5ee;border-radius:7px;padding:5px 7px;break-inside:avoid}
+.a4-chart b{font-size:11px}
 .a4-chart canvas{height:78px!important;width:100%;border:0!important}
 .a4-readings{font-size:10px;line-height:1.35;margin-top:7px;border-top:1px solid #dce5ee;padding-top:6px}
 .a4-foot{font-size:9px;color:#5b6572;margin-top:6px}
 @page{size:A4 portrait;margin:9mm}
-
-/* ---------- Guide ---------- */
-.guide-grid{display:grid;grid-template-columns:1fr;gap:14px}
-.guide-card{background:#fff;border:1px solid var(--line-2);border-radius:22px;padding:16px;box-shadow:var(--shadow)}
-.guide-card h3{margin:2px 0 10px;font-size:17px}
-.guide-card img{display:block;width:100%;height:auto;object-fit:contain;background:var(--bg);border-radius:14px}
-.guide-card ol{padding-left:22px;color:var(--text);line-height:1.7;margin:12px 0 2px}
-.guide-card ol li::marker{color:var(--gold);font-weight:800}
-
-/* ---------- Security / update ---------- */
-.security-card{background:#fff;border:1px solid var(--line-2);border-radius:20px;padding:16px;margin:12px 0;box-shadow:var(--shadow)}
-.security-card h3{margin:0 0 8px;font-size:17px;color:var(--navy)}.security-card p{margin:6px 0;color:var(--text);font-size:13.5px}
-.security-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}.security-actions button{width:100%;margin:0}
-.privacy-badge{display:inline-block;background:var(--green-bg);color:var(--green-d);border-radius:99px;padding:5px 12px;font-weight:700;font-size:12.5px}
-.offline-status{font-size:13px;color:var(--green-d);background:var(--green-bg);padding:10px 12px;border-radius:12px;margin:10px 0 0}
-.update-status{font-size:14px;line-height:1.55;color:var(--text);background:#eef4fa;border-radius:12px;padding:11px 13px;margin:10px 0}
-.update-status.ok{background:var(--green-bg);color:var(--green-d)}.update-status.warn{background:var(--amber-bg);color:#85540e}
-.permission-state{display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:12px;background:#f3f7fb;font-size:14px;margin:10px 0}
-
-/* ---------- Developer ---------- */
-.dev-card{position:relative;background:#fff;border:1px solid var(--line-2);border-radius:26px;box-shadow:var(--shadow);overflow:hidden;margin:12px 0;text-align:center}
-.dev-hero{position:relative;height:330px;display:flex;align-items:flex-end;justify-content:center;border-bottom:4px solid var(--gold);
- background:radial-gradient(circle at 50% 62%,#fff 0,#e9f1f9 46%,#d6e4f2 100%)}
-.dev-hero::before{content:"";position:absolute;width:250px;height:250px;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-46%);border:2px dashed rgba(207,165,81,.65)}
-.dev-hero img{position:relative;height:318px;width:auto;max-width:90%;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(36,73,126,.18))}
-.dev-bubble{position:absolute;right:4%;top:14px;background:#fff;color:var(--navy);border:2px solid var(--gold);border-radius:18px 18px 4px 18px;padding:6px 12px;font-weight:800;font-size:13px;box-shadow:0 4px 12px rgba(36,73,126,.15);animation:bob 2.8s ease-in-out infinite}
-@keyframes bob{50%{transform:translateY(-5px)}}
-.dev-spark{position:absolute;color:var(--gold);font-size:22px}.dev-spark.s1{right:13%;top:34px}.dev-spark.s2{left:9%;bottom:90px;font-size:15px}
-.dev-body{padding:20px 18px 22px}
-.dev-name{font-size:23px;font-weight:800;color:var(--navy);margin:0 0 8px}
-.dev-role{display:inline-block;padding:6px 16px;border-radius:99px;background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;font-size:14px;font-weight:700;box-shadow:0 4px 10px rgba(36,73,126,.22)}
-.dev-info{display:flex;align-items:center;gap:12px;text-align:left;background:#f3f7fb;border:1px solid var(--line-2);border-radius:16px;padding:12px 14px;margin:16px 0 0}
-.dev-info .ico{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;background:#fff;font-size:20px;box-shadow:var(--shadow-s);flex:0 0 auto}
-.dev-info small{display:block;font-size:12px;color:var(--muted)}.dev-info b{font-size:15.5px;color:var(--ink)}
-.dev-note{font-size:13px;color:var(--muted);margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
-.dev-note strong{color:var(--navy)}
-
-/* ---------- Install / modals / PIN ---------- */
-#installPanel{margin:12px 14px 0;padding:14px;border:1.5px solid var(--gold);background:linear-gradient(120deg,#fff,var(--gold-bg));border-radius:18px}
-.install-overlay{position:fixed;inset:0;background:rgba(18,36,66,.58);z-index:9998;display:none;align-items:flex-end;justify-content:center;padding:14px}
-.install-dialog{width:min(100%,520px);background:#fff;border-radius:26px 26px 18px 18px;padding:22px 20px calc(20px + env(safe-area-inset-bottom));box-shadow:0 18px 60px #0005;border-top:4px solid var(--gold)}
-.install-dialog h2{margin:0 0 8px;font-size:22px}.install-dialog p{margin:6px 0 14px;line-height:1.55;color:var(--text)}
-.install-actions{display:grid;gap:9px}.install-actions button{width:100%;min-height:48px;margin:0}
-.install-later{background:#eef3f8;color:var(--navy)}.install-badge{font-size:36px;margin-bottom:5px}
-.install-help-steps{background:#f1f6fb;border-radius:14px;padding:12px;margin:10px 0;font-size:14px;line-height:1.6}
-#healthAlertModal,#appUpdateModal{display:none;position:fixed;inset:0;background:rgba(18,36,66,.62);padding:18px;align-items:center;justify-content:center}
-#healthAlertModal{z-index:9999}#appUpdateModal{z-index:10001}
-#healthAlertModal.open,#appUpdateModal.open{display:flex}
-.health-alert-box,.app-update-box{width:min(100%,500px);max-height:88vh;overflow:auto;background:#fff;border-radius:24px;padding:24px;box-shadow:0 18px 55px #0005;text-align:center}
-.health-alert-box{border-top:7px solid var(--red)}.app-update-box{border-top:7px solid var(--gold)}
-.health-alert-box h2{color:#a23d3a;font-size:24px}.health-alert-box p{font-size:16.5px;line-height:1.6;color:var(--text);text-align:left}
-.app-update-box h2{color:var(--navy)}.app-update-box p{line-height:1.6;color:var(--text)}
-.health-alert-box button,.app-update-box button{width:100%;margin-top:9px}
-.pin-overlay{position:fixed;inset:0;background:rgba(18,36,66,.94);z-index:10050;display:flex;align-items:center;justify-content:center;padding:20px}
-.pin-box{background:#fff;border-radius:24px;padding:26px;width:min(100%,360px);text-align:center;box-shadow:0 15px 50px #0005;border-top:5px solid var(--gold)}
-.pin-box h2{margin-top:0}.pin-box input{font-size:25px;text-align:center;letter-spacing:9px;max-width:220px;margin:12px auto}.pin-box button{width:100%;margin-top:8px}
-
-@media(max-width:420px){
- header h1{font-size:25px}.brand img{width:40px;height:40px}
- .home-metrics{gap:8px}.home-metrics .card{padding:12px}.home-metrics .value{font-size:23px}.home-metrics .span2 .value{font-size:27px}
- .field-grid,.settings-grid{gap:0 8px}.form-card{padding:14px}.settings-card{padding:14px}.report-tile b{font-size:18px}
- .home-actions button{font-size:14px}.nav-btn{font-size:11.5px}.dev-hero{height:300px}.dev-hero img{height:288px}
-}
-@media(max-width:350px){.history-metrics,.med-fields,.report-reading-grid{grid-template-columns:1fr}.med-fields .wide{grid-column:auto}.metric-box .metric-value{font-size:22px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-
-/* ---------- Print: A4 clinician summary only ---------- */
 @media print{
- body{background:#fff!important;font-size:11px!important}
- header,nav,.sheet-backdrop,.no-print,.page-intro,.report-controls,.report-section,.trend-details,#installPanel,#reportView>button{display:none!important}
+ body{background:white!important;font-size:11px!important}
+ header,nav,.no-print{display:none!important}
  main{max-width:none!important;padding:0!important}
  #reportView{display:block!important}
+ #reportView>.card{border:0!important;box-shadow:none!important;padding:0!important;margin:0!important}
+ #reportView h2:not(.a4-head h2){font-size:13px!important;margin:5px 0!important}
+ #reportHeading,#dailySummary,#dailyReadings,
+ #reportView>.card>h2,#reportView>.card>p,
+ #reportView>.card>.card{display:none!important}
  #a4Report{display:block!important}
- canvas{max-height:150px}
 }
+
+/* Color-coded, senior-friendly history cards */
+.history-list{display:flex;flex-direction:column;gap:14px}
+.history-record{background:#fff;border:1px solid #e3eaf2;border-radius:18px;padding:16px;box-shadow:0 4px 14px rgba(28,55,90,.06)}
+.history-record-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.history-record-date{font-size:18px;font-weight:800;color:#172536}
+.history-record-time{font-size:14px;color:#64748b}
+.history-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.metric-box{border-radius:13px;padding:12px 10px;min-width:0;border-left:6px solid transparent}
+.metric-box .metric-label{font-size:14px;font-weight:700;line-height:1.35}
+.metric-box .metric-value{font-size:25px;font-weight:800;line-height:1.25;margin-top:5px;overflow-wrap:anywhere}
+.metric-box .metric-unit{font-size:13px;font-weight:500}
+.metric-bp{background:#fff0f0;border-color:#e34b4b;color:#922626}
+.metric-pulse-bp{background:#fff4e6;border-color:#ed922d;color:#8a4b08}
+.metric-spo{background:#eaf4ff;border-color:#3185d6;color:#15528a}
+.metric-pulse-ox{background:#f1edff;border-color:#8064cf;color:#4e3a91}
+.metric-glucose{background:#fff8dc;border-color:#d3a51d;color:#74570a}
+.metric-temp{background:#e9f8ef;border-color:#39a66a;color:#17663a}
+.history-note{margin-top:12px;padding:10px 12px;border-radius:10px;background:#f3f6fa;color:#46566a;font-size:15px}
+.history-empty{padding:22px;text-align:center;color:#64748b;background:#f5f8fc;border-radius:14px;font-size:17px}
+@media(max-width:390px){.history-metrics{grid-template-columns:1fr}.metric-box .metric-value{font-size:23px}}
+
+/* Professional dashboard refresh v4 */
+:root{--navy:#102a43;--blue:#1769aa;--teal:#0f8b8d;--bg:#f4f7fb;--line:#e4ebf2;--muted:#64748b}
+body{background:var(--bg);color:var(--navy);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;font-size:17px;line-height:1.5}
+header{background:linear-gradient(125deg,#123b63 0%,#1769aa 58%,#168b91 100%);padding:22px 18px 20px;border-radius:0 0 24px 24px;box-shadow:0 8px 24px #123b6322}
+header h1{font-size:25px;letter-spacing:.1px}header p{font-size:14px;font-weight:500;opacity:.9}
+main{max-width:760px;padding:16px 15px 28px}
+nav{position:sticky;top:0;z-index:20;max-width:760px;margin:0 auto;padding:10px 14px;background:#f4f7fbef;backdrop-filter:blur(12px);border-bottom:1px solid #dce5ef;gap:7px;box-shadow:0 4px 14px #18344b0a}
+nav button{font-size:14px;padding:10px 7px;border-radius:12px;white-space:nowrap;min-height:42px}
+@media(max-width:520px){nav{gap:4px;padding:8px 6px}nav button{font-size:11px;padding:9px 3px;min-width:0}}
+nav button.blue{background:#1769aa;color:white;box-shadow:0 3px 9px #1769aa30}
+nav button.light{background:white;color:#36536d;border:1px solid #dce5ef}
+.card{border:1px solid #e7edf3;border-radius:19px;padding:16px;margin:12px 0;box-shadow:0 5px 18px rgba(24,52,75,.055)}
+#home{padding-top:2px}
+#homeProfileCard{background:linear-gradient(120deg,#fff 0%,#f0f7ff 100%);border-color:#dceaf7;padding:13px 15px}
+#homeProfileCard .label{font-size:15px;color:#35536f}
+#homeProfile{font-size:14px;margin-top:5px;color:#5b7084}
+#home>.card:not(#homeProfileCard){margin:0;min-width:0;padding:14px;border-radius:17px}
+#home>.card:not(#homeProfileCard) .label{font-size:14px;color:#4c647b}
+#home>.card:not(#homeProfileCard) .value{font-size:27px;line-height:1.25;color:#143c5b;margin-top:9px}
+#home>.card:nth-of-type(2){border-top:4px solid #d95757}
+#home>.card:nth-of-type(3){border-top:4px solid #e39b3b}
+#home>.card:nth-of-type(4){border-top:4px solid #3b8bc8}
+#home>.card:nth-of-type(5){border-top:4px solid #d0a32c}
+#home>.card:nth-of-type(6){border-top:4px solid #32a36a}
+.home-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:12px 0}
+.home-metrics .card{margin:0}
+.home-section-title{font-size:18px;font-weight:800;color:#173d5c;margin:19px 2px 8px}
+.home-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.home-actions button{margin:0!important;min-height:52px;font-size:16px;padding:12px;border-radius:14px}
+.primary{background:linear-gradient(120deg,#0b9b70,#13ad83);box-shadow:0 5px 12px #0b9b7026}
+.blue{background:#1769aa}
+button{font-family:inherit;font-size:17px;border-radius:13px}
+input,select,textarea{font-family:inherit;font-size:18px;border:1.5px solid #d5e0ea;border-radius:13px}
+h2{font-size:21px;color:#173d5c}
+.tag{background:#edf4fa;color:#49647c;font-size:12px;font-weight:700}
+.sub,.small{color:#687d90}
+#alerts{font-size:14px;line-height:1.55}
+#home .alert,#home #alerts{border-radius:12px}
+@media(max-width:420px){header h1{font-size:23px}.home-metrics{gap:8px}.home-metrics .card{padding:12px}.home-metrics .value{font-size:24px!important}.home-actions button{font-size:14px}nav{gap:5px;padding:8px 8px}nav button{font-size:12px;padding:9px 4px}}
+@media print{nav{display:none!important}.home-metrics{display:block}}
+
+
+/* v5 focused forms and report layout */
+.page-intro{padding:7px 3px 12px}.page-intro .eyebrow{font-size:11px;letter-spacing:1.5px;font-weight:800;color:#16818b}.page-intro h2{font-size:24px;margin:3px 0 2px}.page-intro p{font-size:14px;color:#6a7d90;margin:0}
+.form-card{background:#fff;border:1px solid #e2eaf1;border-radius:18px;padding:17px;margin:12px 0;box-shadow:0 4px 15px rgba(24,52,75,.045)}
+.form-title{display:flex;align-items:center;gap:12px;margin-bottom:14px}.form-title h3,.report-controls h3,.report-section h3{font-size:17px;color:#173d5c;margin:0}.form-title p{font-size:13px;color:#738497;margin:2px 0 0}.form-icon{width:43px;height:43px;border-radius:14px;display:grid;place-items:center;background:#edf5fb;font-size:22px;flex:0 0 auto}
+.bp-form{border-top:4px solid #df7777}.oxygen-form{border-top:4px solid #4d9bd0}.glucose-form{border-top:4px solid #d5ad3f}.temp-form{border-top:4px solid #45a879}
+.field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 12px}.full-field{grid-column:1/-1}
+.form-card label{font-size:14px;color:#344e65;margin-top:5px}.form-card label small{font-weight:500;color:#7b8da0}.form-card input,.form-card textarea{font-size:17px;padding:13px;margin:6px 0 10px;border:1.5px solid #d6e1eb;background:#fbfdff}.form-card textarea{width:100%;resize:vertical;line-height:1.5}.form-card input:focus,.form-card textarea:focus{outline:3px solid #dceeff;border-color:#4d91c8}
+.entry-submit{margin:16px 0 28px}.entry-submit .primary{min-height:54px;font-size:17px}.entry-submit .small{text-align:center;margin-top:10px}
+.report-controls{padding:17px}.report-controls h3{margin-bottom:8px}.report-controls label{font-size:14px}.report-controls input{font-size:17px}.report-section{margin:19px 0}.report-section h3{margin:0 0 10px}.report-grid{gap:10px}.report-tile{border:1px solid #e4ebf2;background:#f8fbfe;padding:14px;border-radius:15px}.report-tile span{font-size:13px}.report-tile b{font-size:21px;color:#173d5c}.history-item{background:#f8fbfe;border:1px solid #e7edf3;border-radius:13px;padding:13px;margin:9px 0;line-height:1.7;font-size:14px;overflow-wrap:anywhere}
+.trend-details{background:#fff;border:1px solid #e2eaf1;border-radius:17px;padding:15px;margin:18px 0}.trend-details summary{font-size:16px;font-weight:800;color:#1769aa;cursor:pointer;padding:3px}.trend-card{background:#fbfdff;border:1px solid #e8eef4;border-radius:13px;padding:12px;margin:10px 0}.trend-card b{font-size:14px;color:#35536f}.trend-card canvas{margin-top:8px;height:150px}
+@media(max-width:420px){.field-grid{gap:0 8px}.form-card{padding:14px}.page-intro h2{font-size:22px}.report-grid{gap:8px}.report-tile{padding:11px}.report-tile b{font-size:18px}.trend-card canvas{height:130px}}
+@media print{.page-intro,.report-controls,.report-section,.trend-details{display:none!important}}
+/* v7 readable settings and developer page */
+.settings-page .page-intro,.developer-page .page-intro{padding:7px 3px 12px}
+.settings-card{background:#fff;border:1px solid #e2eaf1;border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 4px 15px rgba(24,52,75,.045)}
+.settings-title{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+.settings-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#edf5fb;font-size:21px;flex:0 0 auto}
+.settings-title h3{font-size:16px;margin:0;color:#173d5c}.settings-title p{font-size:12px;color:#738497;margin:2px 0 0}
+.settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 12px}
+.settings-field label{font-size:13px;color:#344e65;margin-top:6px}.settings-field input{font-size:17px;padding:12px;margin:5px 0 9px;background:#fbfdff}
+.settings-hint{font-size:13px;line-height:1.55;color:#687d90;background:#f5f8fb;border-radius:11px;padding:10px 12px;margin:7px 0 0}
+.settings-actions{margin:14px 0 25px}.settings-actions button{min-height:52px;font-size:16px;margin:7px 0}
+.permission-state{display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:12px;background:#f4f8fc;font-size:14px;color:#36536d;margin:10px 0}
+.permission-dot{width:10px;height:10px;border-radius:50%;background:#d69b2c;flex:0 0 auto}.permission-dot.on{background:#16a36a}
+.developer-card{overflow:hidden;text-align:center;padding:24px 18px;background:linear-gradient(145deg,#fff 0%,#eff7ff 100%);border:1px solid #dceaf7;border-radius:21px;box-shadow:0 5px 18px rgba(24,52,75,.06);margin:12px 0}
+.developer-avatar{width:76px;height:76px;border-radius:24px;margin:0 auto 13px;display:grid;place-items:center;background:linear-gradient(135deg,#1769aa,#168b91);color:#fff;font-size:34px;font-weight:800;box-shadow:0 7px 17px #1769aa30}
+.developer-name{font-size:22px;font-weight:850;color:#173d5c;margin:0 0 6px}.developer-role{display:inline-block;padding:6px 13px;border-radius:30px;background:#e5f2fb;color:#17608f;font-size:14px;font-weight:750;margin:4px 0 12px}
+.developer-unit{font-size:16px;line-height:1.6;color:#526b80;font-weight:650}.developer-note{font-size:13px;color:#7b8da0;margin-top:20px;border-top:1px solid #e1eaf2;padding-top:13px}
+@media(max-width:420px){.settings-card{padding:14px}.settings-grid{gap:0 8px}.settings-field label{font-size:12px}.developer-card{padding:21px 14px}}
+
+
+
+/* v6 medication planner and readable report cards */
+.med-editor{background:#f6f9fc;border:1px solid #e1eaf2;border-radius:15px;padding:14px;margin-top:12px}
+.med-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px}.med-fields .wide{grid-column:1/-1}
+.med-list{display:flex;flex-direction:column;gap:10px;margin-top:12px}.med-item{border:1px solid #e1eaf2;border-radius:15px;padding:13px;background:#fff}
+.med-item-head{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.med-item h4{margin:0;color:#173d5c;font-size:17px}.med-time{display:inline-flex;background:#eaf4ff;color:#15528a;border-radius:9px;padding:5px 9px;margin:6px 5px 0 0;font-size:14px;font-weight:700}
+.med-actions{display:flex;gap:7px;margin-top:9px}.med-actions button{font-size:13px;padding:8px 11px}.med-empty{padding:15px;text-align:center;background:#f5f8fc;border-radius:12px;color:#64748b}
+.report-reading{background:#fff;border:1px solid #e2eaf1;border-radius:16px;padding:14px;margin:10px 0;box-shadow:0 3px 12px rgba(24,52,75,.04)}
+.report-reading-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;font-weight:800;color:#173d5c}
+.report-reading-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.report-value{padding:10px;border-radius:12px;background:#f3f7fb;min-width:0}.report-value b{display:block;font-size:22px;color:#173d5c;overflow-wrap:anywhere}.report-value span{font-size:13px;color:#64748b}
+@media(max-width:390px){.med-fields,.report-reading-grid{grid-template-columns:1fr}.med-fields .wide{grid-column:auto}}
+
+
+/* V8 offline-first, privacy, backup and security */
+.security-card{background:#fff;border:1px solid #dbe6f1;border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 4px 14px #17365d0b}.security-card h3{margin:0 0 7px;color:#183b66}.security-card p{margin:5px 0;color:#52647a;font-size:13px}.security-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}.security-actions button{width:100%}.privacy-badge{display:inline-block;background:#e5f7ed;color:#087443;border-radius:20px;padding:6px 11px;font-weight:700;font-size:13px}.record-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.record-actions button{padding:8px 12px;font-size:13px}.pin-overlay{position:fixed;inset:0;background:#10243beF;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}.pin-box{background:white;border-radius:20px;padding:24px;width:min(100%,360px);text-align:center;box-shadow:0 15px 50px #0005}.pin-box h2{margin-top:0;color:#173b68}.pin-box input{font-size:25px;text-align:center;letter-spacing:9px;max-width:220px;margin:12px auto}.pin-box button{width:100%;margin-top:8px}.offline-status{font-size:13px;color:#087443;background:#e8f7ee;padding:9px 12px;border-radius:10px;margin:8px 0}
+
+/* V8.3 prominent install prompt */
+.install-overlay{position:fixed;inset:0;background:rgba(9,24,42,.58);z-index:9998;display:none;align-items:flex-end;justify-content:center;padding:14px}
+.install-dialog{width:min(100%,520px);background:#fff;border-radius:24px 24px 18px 18px;padding:22px 20px calc(20px + env(safe-area-inset-bottom));box-shadow:0 18px 60px #0005;color:#17324d}
+.install-dialog h2{margin:0 0 8px;font-size:22px}.install-dialog p{margin:6px 0 14px;line-height:1.55;color:#536779}
+.install-actions{display:grid;gap:9px}.install-actions button{width:100%;min-height:48px;font-weight:800}.install-later{background:#eef3f8;color:#30475d}
+.install-badge{font-size:36px;margin-bottom:5px}.install-help-steps{background:#f1f7fc;border-radius:14px;padding:12px;margin:10px 0;font-size:14px;line-height:1.6}
+.guide-grid{display:grid;grid-template-columns:1fr;gap:14px}.guide-card{background:#fff;border:1px solid #dce7f1;border-radius:20px;padding:16px}.guide-card h3{margin:4px 0 8px;color:#173d5c}.guide-card img{display:block;width:100%;height:auto;max-height:none;object-fit:contain;background:#f2f7fc;border-radius:14px}.guide-card ol{padding-left:22px;color:#40566b;line-height:1.65}.appt-item{background:#fff;border:1px solid #dce7f1;border-radius:15px;padding:13px}.appt-item h4{margin:0 0 6px;color:#173d5c}.appt-meta{font-size:14px;color:#526b80;line-height:1.6}
+
+#healthAlertModal{display:none;position:fixed;inset:0;z-index:9999;background:rgba(12,28,45,.62);padding:18px;align-items:center;justify-content:center}
+#healthAlertModal.open{display:flex}.health-alert-box{width:min(100%,520px);max-height:85vh;overflow:auto;background:#fff;border-radius:22px;padding:24px;box-shadow:0 18px 55px #0005;border-top:7px solid #d94b45;text-align:center}.health-alert-box h2{color:#a52d2d;font-size:25px}.health-alert-box p{font-size:18px;line-height:1.6;color:#34465a;text-align:left}.health-alert-box button{width:100%;margin-top:10px}
+#appUpdateModal{display:none;position:fixed;inset:0;z-index:10001;background:rgba(12,28,45,.62);padding:18px;align-items:center;justify-content:center}
+#appUpdateModal.open{display:flex}.app-update-box{width:min(100%,480px);background:#fff;border-radius:22px;padding:24px;box-shadow:0 18px 55px #0005;text-align:center}.app-update-box h2{color:#155b91}.app-update-box p{line-height:1.6;color:#43566a}.app-update-box button{width:100%;margin-top:9px}
+.update-status{font-size:14px;line-height:1.55;color:#52677b;background:#f1f7fc;border-radius:12px;padding:11px 13px;margin:10px 0}.update-status.ok{background:#eaf8ef;color:#176b3a}.update-status.warn{background:#fff5e8;color:#8a4b08}.update-menu-btn{white-space:nowrap}
 </style></head><body>
 <div id="appUpdateModal" class="no-print" role="dialog" aria-modal="true" aria-labelledby="appUpdateTitle"><div class="app-update-box"><div style="font-size:38px">🔄</div><h2 id="appUpdateTitle">มีเวอร์ชันใหม่ของ H My Health</h2><p>อัปเดตแอปได้ทันทีโดยไม่ต้องลบหรือติดตั้งใหม่ ข้อมูลสุขภาพที่บันทึกไว้ในเครื่องจะไม่ถูกลบ</p><button id="applyAppUpdate" class="blue" type="button">อัปเดตตอนนี้</button><button id="laterAppUpdate" class="light" type="button">ไว้ภายหลัง</button></div></div>
-<header><div class="brand"><img src="./icon-192.png" alt="" width="46" height="46"><h1>H My Health</h1></div><p class="brand-sub">บันทึกและติดตามสุขภาพส่วนบุคคล</p><span id="headerDate" class="header-date"></span></header>
-<div id="updateBanner" class="update-banner no-print" role="status" aria-live="polite"><span class="ub-ico">🔔</span><div class="ub-txt"><b>มีเวอร์ชันใหม่พร้อมอัปเดต</b>ข้อมูลสุขภาพของคุณจะไม่ถูกลบ</div><button type="button" class="blue" onclick="applyPendingAppUpdate()">อัปเดต</button></div>
-<nav aria-label="เมนูหลัก">
-<button type="button" class="nav-btn active" data-nav="home" onclick="show('home')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg><span>หน้าหลัก</span></button>
-<button type="button" class="nav-btn" data-nav="history" onclick="show('history')"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>ประวัติ</span></button>
-<button type="button" class="nav-btn nav-fab" data-nav="entry" onclick="show('entry')" aria-label="บันทึกสุขภาพ"><span class="fab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span>บันทึก</span></button>
-<button type="button" class="nav-btn" data-nav="reportView" onclick="show('reportView')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5"/><path d="M9 18v-3M12 18v-5M15 18v-2"/></svg><span>รายงาน</span></button>
-<button type="button" class="nav-btn" data-nav="more" onclick="openMore()" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg><span>เพิ่มเติม</span><i class="nav-badge" id="moreBadge" hidden></i></button>
-</nav>
-<div id="moreSheet" class="sheet-backdrop no-print" onclick="if(event.target===this)closeMore()"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="moreTitle"><div class="sheet-grip"></div><h3 id="moreTitle">เมนูเพิ่มเติม</h3><button type="button" class="sheet-item" data-page="profile" onclick="show('profile')"><span class="sheet-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span><span><b>ข้อมูลผู้ใช้งาน</b><small>โปรไฟล์ ยา ประวัติแพ้ยา และข้อมูลฉุกเฉิน</small></span><span class="chev">›</span></button><button type="button" class="sheet-item" data-page="appointments" onclick="show('appointments')"><span class="sheet-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><span><b>นัดตรวจ</b><small>บันทึกวัน เวลา และสถานพยาบาล</small></span><span class="chev">›</span></button><button type="button" class="sheet-item" data-page="settings" onclick="show('settings')"><span class="sheet-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg></span><span><b>ตั้งค่า</b><small>เกณฑ์เฝ้าระวัง PIN และสำรองข้อมูล</small></span><span class="chev">›</span></button><button type="button" class="sheet-item" data-page="guide" onclick="show('guide')"><span class="sheet-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2z"/><path d="M4 21V5"/><path d="M9 8h6"/></svg></span><span><b>วิธีใช้งาน</b><small>คู่มือพร้อมภาพประกอบ</small></span><span class="chev">›</span></button><button type="button" class="sheet-item" data-page="developer" onclick="show('developer')"><span class="sheet-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="11" r="2.5"/><path d="M5.5 17c.6-2 2-3 3.5-3s2.9 1 3.5 3M15 10h3M15 14h3"/></svg></span><span><b>ผู้พัฒนา</b><small>ข้อมูลผู้จัดทำและอัปเดตแอป</small></span><span class="new-pill" id="devNewPill" hidden>ใหม่</span><span class="chev">›</span></button></div></div>
+<header><h1>❤️ H My Health</h1><p id="headerDate" class="header-date"></p></header>
+<nav><button class="blue" onclick="show('home')">หน้าหลัก</button><button class="light" onclick="show('profile')">ผู้ใช้งาน</button><button class="light" onclick="show('history')">ประวัติ</button><button class="light" onclick="show('settings')">ตั้งค่า</button><button class="light" onclick="show('appointments')">นัดตรวจ</button><button class="light" onclick="show('guide')">วิธีใช้งาน</button><button class="light" onclick="show('developer')">ผู้พัฒนา</button></nav>
+<div id="installPanel" class="card no-print" style="margin:12px 14px;padding:13px;border:2px solid #b8d8f5;display:none">
+ <div style="font-weight:800;font-size:18px">📲 ติดตั้ง H My Health ลงเครื่อง</div>
+ <div id="installHelp" class="small" style="margin:5px 0 9px">ติดตั้งเพื่อเพิ่มไอคอนไว้ที่หน้าจอ แล้วแตะเข้าใช้งานได้สะดวก</div>
+ <button id="installButton" class="blue" style="width:100%;display:none" type="button">ติดตั้งแอป</button>
+</div>
 <div id="installOverlay" class="install-overlay no-print" role="dialog" aria-modal="true" aria-labelledby="installTitle">
  <div class="install-dialog">
   <div class="install-badge">📲</div>
@@ -312,28 +204,22 @@ canvas{width:100%;height:175px;display:block;background:#fff;border:1px solid va
 <div id="healthAlertModal" role="dialog" aria-modal="true" aria-labelledby="healthAlertTitle"><div class="health-alert-box"><div style="font-size:42px">⚠️</div><h2 id="healthAlertTitle">สถานะค่าที่ควรสังเกต</h2><div id="healthAlertText"></div><p class="small">ข้อความนี้เป็นการคัดกรองเบื้องต้น ไม่ใช่การวินิจฉัย หากมีอาการรุนแรงหรือฉุกเฉิน โทร 1669</p><button type="button" class="blue" onclick="closeHealthAlert()">รับทราบ</button></div></div>
 <main>
 <section id="home">
-<div class="summary-pill" id="homeSummary">📋 ยังไม่มีบันทึกสุขภาพ · เริ่มบันทึกค่าแรกของคุณ</div>
-<div class="card profile-card" id="homeProfileCard"><div class="profile-avatar">👤</div><div class="profile-info"><div class="label">ข้อมูลผู้ใช้งาน</div><div id="homeProfile" class="sub">ยังไม่ได้กรอกข้อมูลผู้ใช้งาน</div></div><button type="button" class="chip-btn" onclick="show('profile')">แก้ไข</button></div>
-<div class="home-section-title">ค่าล่าสุดของคุณ</div>
+<div class="home-section-title" style="margin-top:2px">ภาพรวมสุขภาพ</div>
+<div class="card" id="homeProfileCard"><div class="row"><span class="label">👤 ข้อมูลผู้ใช้งาน</span><button class="light" style="font-size:13px;padding:7px 11px" onclick="show('profile')">แก้ไขข้อมูล</button></div><div id="homeProfile" class="sub">ยังไม่ได้กรอกข้อมูลผู้ใช้งาน</div></div>
 <div class="home-metrics">
-<div class="card span2 m-bp"><div class="m-top"><span class="m-ico">❤️</span><span class="label">ความดันโลหิต</span><span class="tag">mmHg</span></div><div class="value" id="bp">ยังไม่มีข้อมูล</div><div class="sub" id="bpstatus">บันทึกเพื่อเริ่มติดตาม</div></div>
-<div class="card m-pulse"><div class="m-top"><span class="m-ico">💓</span><span class="label">ชีพจร</span></div><div class="value" id="pulseBp">—</div><div class="sub">ครั้ง/นาที</div></div>
-<div class="card m-spo"><div class="m-top"><span class="m-ico">🫁</span><span class="label">SpO₂</span><span class="tag">%</span></div><div class="value" id="spo">—</div><div class="sub">ออกซิเจนในเลือด</div></div>
-<div class="card m-resp"><div class="m-top"><span class="m-ico">🌬️</span><span class="label">การหายใจ</span></div><div class="value" id="homeResp">—</div><div class="sub">ครั้ง/นาที</div></div>
-<div class="card m-temp"><div class="m-top"><span class="m-ico">🌡️</span><span class="label">อุณหภูมิ</span><span class="tag">°C</span></div><div class="value" id="temp">—</div><div class="sub">ร่างกาย</div></div>
-<div class="card m-glu"><div class="m-top"><span class="m-ico">🩸</span><span class="label">น้ำตาลปลายนิ้ว</span></div><div class="value" id="sugar">—</div><div class="sub">mg/dL</div></div>
-<div class="card m-weight"><div class="m-top"><span class="m-ico">⚖️</span><span class="label">น้ำหนัก</span></div><div class="value" id="homeWeight">—</div><div class="sub">กิโลกรัม</div></div>
-<div class="card span2 m-height"><div class="m-top"><span class="m-ico">📏</span><span class="label">ส่วนสูง</span><span class="tag">cm</span></div><div class="value" id="homeHeight">—</div><div class="sub" id="homeBmi">BMI —</div></div>
+<div class="card"><div class="row"><span class="label">❤️ ความดันโลหิต</span><span class="tag">mmHg</span></div><div class="value" id="bp">ยังไม่มีข้อมูล</div><div class="sub" id="bpstatus">บันทึกเพื่อเริ่มติดตาม</div></div>
+<div class="card"><div class="row"><span class="label">💓 ชีพจร (เครื่องวัดความดัน)</span></div><div class="value" id="pulseBp">—</div><div class="sub">ครั้ง/นาที</div></div>
+<div class="card"><div class="row"><span class="label">🫁 SpO₂</span><span class="tag">%</span></div><div class="value" id="spo">—</div></div>
+<div class="card"><div class="row"><span class="label">🫁 อัตราการหายใจ</span><span class="tag">ครั้ง/นาที</span></div><div class="value" id="homeResp">—</div></div>
+<div class="card"><div class="row"><span class="label">🩸 น้ำตาลปลายนิ้ว</span><span class="tag">mg/dL</span></div><div class="value" id="sugar">—</div></div>
+<div class="card"><div class="row"><span class="label">🌡️ อุณหภูมิร่างกาย</span><span class="tag">°C</span></div><div class="value" id="temp">—</div></div>
+<div class="card"><div class="row"><span class="label">⚖️ น้ำหนัก</span><span class="tag">kg</span></div><div class="value" id="homeWeight">—</div></div>
+<div class="card"><div class="row"><span class="label">📏 ส่วนสูง</span><span class="tag">cm</span></div><div class="value" id="homeHeight">—</div><div class="sub" id="homeBmi">BMI —</div></div>
 </div>
-<div class="home-actions"><button type="button" class="primary" onclick="show('entry')">＋ บันทึกสุขภาพ</button><button type="button" class="blue" onclick="show('reportView')">📄 รายงานสุขภาพ</button></div>
+<div class="home-actions"><button class="primary" onclick="show('entry')">＋ บันทึกสุขภาพ</button><button class="blue" onclick="show('reportView')">📄 รายงานสุขภาพ</button></div>
 <div class="home-section-title">สถานะค่าที่ควรสังเกต</div>
-<div class="card alert-card"><div id="alerts" class="sub">ยังไม่มีผลการประเมิน</div></div>
-<div id="installPanel" class="card no-print" style="display:none">
- <div style="font-weight:800;font-size:18px">📲 ติดตั้ง H My Health ลงเครื่อง</div>
- <div id="installHelp" class="small" style="margin:5px 0 9px">ติดตั้งเพื่อเพิ่มไอคอนไว้ที่หน้าจอ แล้วแตะเข้าใช้งานได้สะดวก</div>
- <button id="installButton" class="blue" style="width:100%;display:none" type="button">ติดตั้งแอป</button>
-</div>
-<p class="small foot-note">ข้อมูลสุขภาพจัดเก็บในอุปกรณ์นี้ · ใช้ประกอบการติดตาม ไม่แทนคำแนะนำจากแพทย์</p>
+<div class="card" style="background:#fff;border-left:4px solid #e6a23c"><div id="alerts" class="sub">ยังไม่มีผลการประเมิน</div></div>
+<p class="small" style="text-align:center;margin:18px 4px 0">ข้อมูลสุขภาพจัดเก็บในอุปกรณ์นี้ · ใช้ประกอบการติดตาม ไม่แทนคำแนะนำจากแพทย์</p>
 </section>
 <section id="entry" class="hidden entry-page">
  <div class="page-intro"><span class="eyebrow">HEALTH LOG</span><h2>บันทึกข้อมูลสุขภาพ</h2><p>เลือกกรอกเฉพาะค่าที่วัดได้ในครั้งนี้ ไม่จำเป็นต้องกรอกทุกช่อง</p></div>
@@ -356,8 +242,8 @@ canvas{width:100%;height:175px;display:block;background:#fff;border:1px solid va
    <button class="blue" type="button" onclick="renderReport()">แสดงรายงาน</button>
    <button class="primary" type="button" onclick="printReport()">ส่งออกรายงาน A4 / PDF</button>
   </div>
-  <p class="small no-print" style="margin-bottom:0">รายงาน PDF จะจัดหน้า A4 พร้อมค่าล่าสุด ค่าสูงสุด ค่าต่ำสุด และกราฟแนวโน้ม 7 วัน</p>
- </div>
+  <p class="small no-print">รายงาน PDF จะจัดหน้า A4 พร้อมค่าล่าสุด ค่าสูงสุด ค่าต่ำสุด และกราฟแนวโน้ม 7 วัน</p>
+  
   <div id="a4Report" style="display:none">
    <div class="a4-head">
     <div><h2>รายงานสรุปสุขภาพ</h2><div style="font-size:11px">H My Health • สำหรับประกอบการพบแพทย์</div></div>
@@ -377,7 +263,7 @@ canvas{width:100%;height:175px;display:block;background:#fff;border:1px solid va
    <div id="a4Readings" class="a4-readings"></div>
    <div class="a4-foot">หมายเหตุ: สรุปจากข้อมูลที่ผู้ใช้บันทึก ไม่ใช่การวินิจฉัยโรค ค่าสูงสุด/ต่ำสุดคำนวณจากรายการในวันที่เลือก กราฟแสดงแนวโน้ม 7 วันจนถึงวันที่เลือก</div>
   </div>
- <div>
+
   <div class="report-section"><h3 id="reportHeading">สรุปข้อมูลสุขภาพ</h3><div id="dailySummary" class="report-grid"></div></div>
   <div class="report-section"><h3>รายการวัดในวันที่เลือก</h3><div id="dailyReadings">ยังไม่มีข้อมูล</div></div>
   <details class="trend-details"><summary>ดูกราฟแนวโน้มสุขภาพย้อนหลัง</summary><label for="trendDays">ช่วงเวลาที่แสดง</label><select id="trendDays" onchange="renderTrendCharts()"><option value="7">7 วัน</option><option value="30" selected>30 วัน</option><option value="90">90 วัน</option></select><p class="small">แสดงเฉพาะค่าที่มีการบันทึกจริงในอุปกรณ์นี้</p>
@@ -389,7 +275,8 @@ canvas{width:100%;height:175px;display:block;background:#fff;border:1px solid va
   <div class="trend-card"><b>น้ำตาล (mg/dL)</b><canvas id="chartGlucose" width="700" height="180"></canvas></div>
   <div class="trend-card"><b>อุณหภูมิ (°C)</b><canvas id="chartTemp" width="700" height="180"></canvas></div></details>
   <div class="report-section"><h3>📈 เปรียบเทียบข้อมูลรายเดือน</h3><p class="small">เปรียบเทียบจำนวนครั้งที่บันทึกและค่าเฉลี่ยจากข้อมูลที่มีเท่านั้น</p><div id="monthCompare" class="report-grid"></div></div>
-  <p class="small no-print">รายงานนี้เป็นข้อมูลที่ผู้ใช้บันทึกเอง ไม่ใช่การวินิจฉัยโรค โปรดให้แพทย์พิจารณาร่วมกับอาการและประวัติ</p>
+  <p class="small">รายงานนี้เป็นข้อมูลที่ผู้ใช้บันทึกเอง ไม่ใช่การวินิจฉัยโรค โปรดให้แพทย์พิจารณาร่วมกับอาการและประวัติ</p>
+  <button class="light no-print" style="width:100%" onclick="show('home')">กลับหน้าหลัก</button>
  </div>
 </section>
 <section id="profile" class="hidden profile-page">
@@ -405,8 +292,8 @@ canvas{width:100%;height:175px;display:block;background:#fff;border:1px solid va
  <div class="field-grid"><div><label for="bloodType">หมู่เลือด</label><select id="bloodType"><option value="">ไม่ทราบ</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div><div><label for="allergies">แพ้อาหาร / ข้อมูลเพิ่มเติม</label><input id="allergies" placeholder="เช่น แพ้กุ้ง / ไม่มี"></div><div><label for="emergencyContact">ผู้ติดต่อฉุกเฉิน</label><input id="emergencyContact" placeholder="ชื่อผู้ติดต่อ"></div><div><label for="emergencyPhone">เบอร์โทรศัพท์</label><input id="emergencyPhone" type="tel" inputmode="tel" placeholder="เบอร์โทรศัพท์ผู้ติดต่อ"></div></div>
  <p class="small">ข้อมูลนี้เก็บในอุปกรณ์นี้เท่านั้น ควรกรอกให้ถูกต้องและตรวจสอบเป็นระยะ</p></div>
  <div class="form-card"><h3>🧾 ประวัติการยืนยันกินยา</h3><p class="small">กด “กินยาแล้ว” ที่รายการยา เพื่อบันทึกวันและเวลาที่รับประทานจริง</p><div id="medicationLogList" class="med-list"></div></div>
- <div class="entry-submit"><button class="primary" onclick="saveProfile()">บันทึกข้อมูลผู้ใช้งาน</button><p class="small">🔒 ข้อมูลนี้เก็บไว้ในเบราว์เซอร์ของอุปกรณ์นี้ ไม่ได้ส่งขึ้นเซิร์ฟเวอร์</p></div>
-</section><section id="history" class="hidden"><div class="page-intro"><span class="eyebrow">HEALTH HISTORY</span><h2>ประวัติสุขภาพ</h2><p>แยกสีแต่ละค่า เพื่อให้อ่านง่ายและดูย้อนหลังได้สะดวก</p></div><div id="list">ยังไม่มีข้อมูล</div></section>
+ <div class="entry-submit"><button class="primary" onclick="saveProfile()">บันทึกข้อมูลผู้ใช้งาน</button><button class="light" style="width:100%" onclick="show('home')">กลับหน้าหลัก</button><p class="small">🔒 ข้อมูลนี้เก็บไว้ในเบราว์เซอร์ของอุปกรณ์นี้ ไม่ได้ส่งขึ้นเซิร์ฟเวอร์</p></div>
+</section><section id="history" class="hidden"><div class="card"><h2>ประวัติสุขภาพ</h2><p class="small">แยกสีแต่ละค่า เพื่อให้อ่านง่ายและดูย้อนหลังได้สะดวก</p><div id="list">ยังไม่มีข้อมูล</div><button class="light" onclick="show('home')">กลับหน้าหลัก</button></div></section>
 <section id="settings" class="hidden settings-page">
  <div class="page-intro"><span class="eyebrow">HEALTH THRESHOLDS</span><h2>ตั้งค่าเกณฑ์สุขภาพ</h2><p>กำหนดค่าที่ควรสังเกตเมื่อบันทึกข้อมูลสุขภาพ</p></div>
  <div class="settings-card">
@@ -443,7 +330,7 @@ canvas{width:100%;height:175px;display:block;background:#fff;border:1px solid va
   <div class="offline-status">✓ โหมดออฟไลน์: เมื่อเปิดแอปและแคชไฟล์ครบแล้ว สามารถใช้งานโดยไม่เชื่อมต่ออินเทอร์เน็ตได้</div>
  </div>
  <div class="security-card"><h3>🛡️ ความเป็นส่วนตัว</h3><p>ข้อมูลโปรไฟล์ ประวัติสุขภาพ รายการยา และเกณฑ์เฝ้าระวังเก็บไว้ในพื้นที่จัดเก็บของเบราว์เซอร์บนอุปกรณ์นี้เท่านั้น ไม่มีระบบบัญชีผู้ใช้ ไม่มีการซิงก์ข้ามอุปกรณ์ และไม่มีการส่งข้อมูลไปยังคลาวด์</p><p>การล้างข้อมูลเว็บไซต์ ถอนการติดตั้งเบราว์เซอร์ หรือเปลี่ยนอุปกรณ์ อาจทำให้ข้อมูลสูญหาย ควรสำรองข้อมูลเป็นระยะ</p></div>
- <div class="settings-actions"><button class="primary" onclick="saveSettings()">บันทึกการตั้งค่า</button></div>
+ <div class="settings-actions"><button class="primary" onclick="saveSettings()">บันทึกการตั้งค่า</button><button class="light" style="width:100%" onclick="show('home')">กลับหน้าหลัก</button></div>
 </section>
 
 <section id="appointments" class="hidden">
@@ -456,31 +343,21 @@ canvas{width:100%;height:175px;display:block;background:#fff;border:1px solid va
 <div><label>หมายเหตุ</label><input id="apptNote" placeholder="เช่น เตรียมผลตรวจ"></div>
 </div><button class="primary" style="width:100%;margin-top:12px" onclick="addAppointment()">＋ บันทึกนัดหมาย</button>
 <p class="small">แอปบันทึกนัดตรวจไว้ให้เปิดดูเอง ไม่มีการเตือนอัตโนมัติเมื่อถึงวันนัด</p></div>
-<h3>รายการนัดหมาย</h3><div id="appointmentList" class="med-list"></div>
+<h3>รายการนัดหมาย</h3><div id="appointmentList" class="med-list"></div><button class="light" style="width:100%" onclick="show('home')">กลับหน้าหลัก</button>
 </section>
-<section id="guide" class="hidden"><div class="page-intro"><span class="eyebrow">USER GUIDE</span><h2>วิธีการใช้งาน H My Health</h2><p>แต่ละเมนูมีภาพประกอบแยกและขั้นตอนการใช้งาน</p></div><div id="guideCards" class="guide-grid"></div></section>
-<section id="developer" class="hidden developer-page">
- <div class="page-intro"><span class="eyebrow">APPLICATION INFORMATION</span><h2>ผู้พัฒนาแอปพลิเคชัน</h2><p>ข้อมูลผู้จัดทำแอป</p></div>
- <div class="dev-card">
-  <div class="dev-hero"><span class="dev-bubble">สวัสดีครับ 👋</span><img src="./developer-character.png" alt="ภาพการ์ตูนผู้พัฒนาแอป ผู้ช่วยพยาบาลกำลังโบกมือ" width="560" height="912"></div>
-  <div class="dev-body"><p class="dev-name">นายแทน นามวงค์</p><span class="dev-role">ผู้ช่วยพยาบาล</span>
-   
-   <div class="dev-info"><span class="ico">📱</span><div><small>แอปพลิเคชัน</small><b>H My Health</b></div></div>
-   <div class="dev-note"><strong>H My Health</strong> · เวอร์ชัน 11<br>แอปพลิเคชันสำหรับบันทึกและติดตามข้อมูลสุขภาพส่วนบุคคล</div></div>
- </div>
+<section id="guide" class="hidden"><div class="page-intro"><span class="eyebrow">USER GUIDE</span><h2>วิธีการใช้งาน H My Health</h2><p>แต่ละเมนูมีภาพประกอบแยกและขั้นตอนการใช้งาน</p></div><div id="guideCards" class="guide-grid"></div><button class="light" style="width:100%;margin-top:12px" onclick="show('home')">กลับหน้าหลัก</button></section>
+\n<section id="developer" class="hidden developer-page">
+ <div class="page-intro"><span class="eyebrow">APPLICATION INFORMATION</span><h2>ผู้พัฒนาแอปพลิเคชัน</h2><p>ข้อมูลผู้จัดทำและหน่วยงาน</p></div>
+ <div class="developer-card"><div class="developer-avatar">T</div><p class="developer-name">นายแทน นามวงค์</p><div class="developer-role">ผู้ช่วยพยาบาล</div><div class="developer-unit">หอผู้ป่วยโรคหลอดเลือดสมอง</div><div class="developer-note">H My Health<br>แอปพลิเคชันสำหรับบันทึกและติดตามข้อมูลสุขภาพส่วนบุคคล</div></div>
  <div class="security-card" id="updateSettingsCard"><h3>🔄 อัปเดต H My Health</h3><p>แอปจะตรวจสอบเวอร์ชันใหม่ให้อัตโนมัติเมื่อเปิดใช้งานและเมื่อเชื่อมต่ออินเทอร์เน็ต หากพบเวอร์ชันใหม่จะแสดงหน้าต่างแจ้งเตือน ข้อมูลสุขภาพในอุปกรณ์จะไม่ถูกลบ</p><div id="appUpdateStatus" class="update-status" role="status" aria-live="polite">ระบบตรวจสอบเวอร์ชันใหม่อัตโนมัติ</div><button class="blue" style="width:100%;min-height:48px" type="button" onclick="checkAppUpdate(true)">ตรวจสอบเวอร์ชันใหม่</button></div>
+ <button class="light" style="width:100%" onclick="show('home')">กลับหน้าหลัก</button>
 </section>
 
 </main>
 <script>
 const $=id=>document.getElementById(id); let records=JSON.parse(localStorage.getItem('records')||'[]'); records=records.map((r,i)=>({...r,id:r.id||('legacy-'+i+'-'+String(r.iso||''))})); localStorage.setItem('records',JSON.stringify(records));
 $('headerDate').textContent=new Date().toLocaleDateString('th-TH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-function show(id){['home','entry','history','settings','reportView','profile','developer','appointments','guide'].forEach(x=>$(x).classList.toggle('hidden',x!==id));if(id==='history')renderHistory();if(id==='appointments')renderAppointments();if(id==='guide')renderGuide();if(id==='profile'){loadProfile();renderMedications();renderMedicationLog();renderAllergyHistory();}if(id==='settings'){loadLimits();}if(id==='home')renderHome();if(id==='reportView'){if(!$('reportDate').value)$('reportDate').value=localDateKey(new Date());renderReport();}closeMore();setNav(id);window.scrollTo(0,0);}
-const NAV_MAP={home:'home',history:'history',entry:'entry',reportView:'reportView'};
-function setNav(id){const t=NAV_MAP[id]||'more';document.querySelectorAll('nav .nav-btn').forEach(b=>{const on=b.dataset.nav===t;b.classList.toggle('active',on);if(on)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});document.querySelectorAll('.sheet-item').forEach(b=>b.classList.toggle('current',b.dataset.page===id));}
-function openMore(){const m=$('moreSheet');if(m)m.classList.add('open');}
-function closeMore(){const m=$('moreSheet');if(m)m.classList.remove('open');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMore();});
+function show(id){['home','entry','history','settings','reportView','profile','developer','appointments','guide'].forEach(x=>$(x).classList.toggle('hidden',x!==id));if(id==='history')renderHistory();if(id==='appointments')renderAppointments();if(id==='guide')renderGuide();if(id==='profile'){loadProfile();renderMedications();renderMedicationLog();renderAllergyHistory();}if(id==='settings'){loadLimits();}if(id==='home')renderHome();if(id==='reportView'){if(!$('reportDate').value)$('reportDate').value=localDateKey(new Date());renderReport();}}
 function num(id){return $(id).value===''?null:Number($(id).value)}
 function showHealthAlert(msg){$('healthAlertText').innerHTML='<p>'+String(msg).split('；').map(escapeHTML).join('</p><p>')+'</p>';$('healthAlertModal').classList.add('open');$('healthAlertModal').focus();}
 function closeHealthAlert(){$('healthAlertModal').classList.remove('open');}
@@ -542,7 +419,7 @@ function save(){
 // Local-only backup, record editing and PIN protection
 function editRecord(id){const i=records.findIndex(r=>r.id===id);if(i<0)return;const r=records[i];const fields=[['sys','ความดันตัวบน'],['dia','ความดันตัวล่าง'],['pb','ชีพจร'],['sp','SpO₂'],['resp','อัตราการหายใจ'],['po','ชีพจรเดิมจากเครื่องปลายนิ้ว'],['gl','น้ำตาล'],['te','อุณหภูมิ'],['weight','น้ำหนัก'],['height','ส่วนสูง']];for(const [k,label] of fields){const v=prompt('แก้ไข'+label+' (เว้นว่างหากไม่มีค่า)',r[k]??'');if(v===null)return;r[k]=v.trim()===''?null:Number(v);if(r[k]!==null&&!Number.isFinite(r[k])){alert('กรุณากรอกเป็นตัวเลข');return;}}const note=prompt('แก้ไขหมายเหตุ',r.note||'');if(note===null)return;r.note=note;records[i]=r;localStorage.setItem('records',JSON.stringify(records));renderHistory();renderHome();alert('แก้ไขรายการแล้ว');}
 function deleteRecord(id){if(!confirm('ยืนยันลบรายการสุขภาพนี้? การลบไม่สามารถย้อนกลับได้'))return;records=records.filter(r=>r.id!==id);localStorage.setItem('records',JSON.stringify(records));renderHistory();renderHome();}
-function exportBackup(){const keys=['records','profile','medicationItems','medicationLog','allergyHistory','limits','appointments'];const data={app:'H My Health',version:11,createdAt:new Date().toISOString(),data:{}};keys.forEach(k=>{const v=localStorage.getItem(k);if(v!==null)data.data[k]=JSON.parse(v)});const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const fname='MyHealthRecord-Backup-'+new Date().toISOString().slice(0,10)+'.json';try{const f=new File([blob],fname,{type:'application/json'});if(navigator.canShare&&navigator.canShare({files:[f]})&&/iphone|ipad|ipod/i.test(navigator.userAgent)){navigator.share({files:[f],title:'สำรองข้อมูล H My Health'}).catch(()=>{});return;}}catch(e){}const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='MyHealthRecord-Backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function exportBackup(){const keys=['records','profile','medicationItems','medicationLog','allergyHistory','limits','appointments'];const data={app:'H My Health',version:11,createdAt:new Date().toISOString(),data:{}};keys.forEach(k=>{const v=localStorage.getItem(k);if(v!==null)data.data[k]=JSON.parse(v)});const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='MyHealthRecord-Backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function restoreBackup(ev){const file=ev.target.files&&ev.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const b=JSON.parse(reader.result);if(!b||b.app!=='H My Health'||!b.data||!Array.isArray(b.data.records))throw new Error('รูปแบบไฟล์ไม่ถูกต้อง');if(!confirm('กู้คืนข้อมูลจากไฟล์นี้หรือไม่? ข้อมูลปัจจุบันในอุปกรณ์จะถูกแทนที่'))return;['records','profile','medicationItems','medicationLog','allergyHistory','limits','appointments'].forEach(k=>{if(Object.prototype.hasOwnProperty.call(b.data,k))localStorage.setItem(k,JSON.stringify(b.data[k]));else localStorage.removeItem(k)});records=JSON.parse(localStorage.getItem('records')||'[]');alert('กู้คืนข้อมูลเรียบร้อยแล้ว');location.reload();}catch(e){alert('ไม่สามารถกู้คืนได้: '+e.message)}finally{ev.target.value='';}};reader.readAsText(file);}
 async function pinHash(pin,salt){const bytes=new TextEncoder().encode(salt+':'+pin);if(window.crypto&&crypto.subtle){const digest=await crypto.subtle.digest('SHA-256',bytes);return Array.from(new Uint8Array(digest)).map(x=>x.toString(16).padStart(2,'0')).join('')}return btoa(unescape(encodeURIComponent(salt+':'+pin)));}
 async function setupPin(){const pin=prompt('ตั้งรหัส PIN 6 หลัก (กด ยกเลิก หากไม่ต้องการใช้)');if(pin===null)return;if(!/^\d{6}$/.test(pin)){alert('กรุณาตั้ง PIN เป็นตัวเลข 6 หลัก');return;}const again=prompt('กรอกรหัส PIN ซ้ำอีกครั้ง');if(again!==pin){alert('รหัส PIN ไม่ตรงกัน');return;}const salt=window.crypto&&window.crypto.getRandomValues?Array.from(window.crypto.getRandomValues(new Uint8Array(16))).map(x=>x.toString(16).padStart(2,'0')).join(''):String(Date.now());localStorage.setItem('appPin',JSON.stringify({salt,hash:await pinHash(pin,salt)}));alert('ตั้ง PIN แล้ว จะขอ PIN เมื่อเปิดแอปครั้งถัดไป');}
@@ -585,15 +462,15 @@ function renderMonthCompare(key){
 }
 function drawMiniChart(c,labels,values){
  const ctx=c.getContext('2d'),w=c.width,h=c.height;ctx.clearRect(0,0,w,h);const good=values.filter(v=>v!==null&&Number.isFinite(v));
- ctx.font='16px "Noto Sans Thai",Tahoma,sans-serif';ctx.strokeStyle='#e3ebf3';
+ ctx.font='16px Arial';ctx.strokeStyle='#e3e9f0';
  for(let i=0;i<4;i++){let y=15+i*(h-42)/3;ctx.beginPath();ctx.moveTo(42,y);ctx.lineTo(w-10,y);ctx.stroke();}
- if(!good.length){ctx.fillStyle='#5f7694';ctx.fillText('ยังไม่มีข้อมูล',55,95);return;}
+ if(!good.length){ctx.fillStyle='#586779';ctx.fillText('ยังไม่มีข้อมูล',55,95);return;}
  let lo=Math.min(...good),hi=Math.max(...good);if(lo===hi){lo-=1;hi+=1;}
  const px=i=>50+i*(w-75)/Math.max(1,labels.length-1),py=v=>h-28-(v-lo)/(hi-lo)*(h-58);
- ctx.strokeStyle='#2c5c9a';ctx.lineJoin='round';ctx.lineWidth=4;ctx.beginPath();let started=false;
+ ctx.strokeStyle='#0875d1';ctx.lineWidth=4;ctx.beginPath();let started=false;
  values.forEach((v,i)=>{if(v===null){started=false;return;}if(!started){ctx.moveTo(px(i),py(v));started=true;}else ctx.lineTo(px(i),py(v));});ctx.stroke();
- values.forEach((v,i)=>{if(v===null)return;ctx.fillStyle='#cfa551';ctx.strokeStyle='#24497e';ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(px(i),py(v),5.5,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.fillStyle='#1e3a66';ctx.fillText(String(v),px(i)-10,py(v)-9);});
- const step=Math.max(1,Math.ceil(labels.length/10));labels.forEach((l,i)=>{if(i%step!==0&&i!==labels.length-1)return;ctx.fillStyle='#5f7694';ctx.fillText(l,px(i)-12,h-6);});
+ values.forEach((v,i)=>{if(v===null)return;ctx.fillStyle='#0875d1';ctx.beginPath();ctx.arc(px(i),py(v),5,0,Math.PI*2);ctx.fill();ctx.fillStyle='#263548';ctx.fillText(String(v),px(i)-10,py(v)-9);});
+ const step=Math.max(1,Math.ceil(labels.length/10));labels.forEach((l,i)=>{if(i%step!==0&&i!==labels.length-1)return;ctx.fillStyle='#526174';ctx.fillText(l,px(i)-12,h-6);});
 }
 
 function buildA4Report(){
@@ -631,12 +508,11 @@ function buildA4Report(){
 function printReport(){
  renderReport();
  buildA4Report();
- $('a4Report').style.display='block';
- setTimeout(()=>{try{window.print();}finally{$('a4Report').style.display='none';}},250);
+
 }
 
 
-function renderHome(){const p=JSON.parse(localStorage.getItem('profile')||'{}');{const today=localDateKey(new Date()),n=records.length,t=records.filter(x=>recordDateKey(x)===today).length;$('homeSummary').textContent=n?('📋 วันนี้ '+t+' ครั้ง · ทั้งหมด '+n+' ครั้ง'):'📋 ยังไม่มีบันทึกสุขภาพ · เริ่มบันทึกค่าแรกของคุณ';}const full=[p.firstName,p.lastName].filter(Boolean).join(' ');$('homeProfile').textContent=full?(full+(p.age?' • อายุ '+p.age+' ปี':'')):'ยังไม่ได้กรอกข้อมูลผู้ใช้งาน';let r=records[0];if(!r)return;$('bp').textContent=r.sys!==null&&r.dia!==null?r.sys+' / '+r.dia:'—';$('pulseBp').textContent=r.pb??'—';$('spo').textContent=r.sp!==null?r.sp+'%':'—';$('homeResp').textContent=r.resp??'—';$('sugar').textContent=r.gl??'—';$('temp').textContent=r.te!==null?r.te+' °C':'—';$('homeWeight').textContent=r.weight!=null?r.weight+' kg':'—';$('homeHeight').textContent=r.height!=null?r.height+' cm':'—';$('homeBmi').textContent=(r.weight>0&&r.height>0)?'BMI '+(r.weight/Math.pow(r.height/100,2)).toFixed(1):'BMI —';if(r.sys!==null&&r.dia!==null){const l={bpSysHigh:140,bpDiaHigh:90,bpSysLow:90,bpDiaLow:60,...JSON.parse(localStorage.getItem('limits')||'{}')};let t='ค่าความดันล่าสุด';if(r.sys>=180||r.dia>=120)t='⚠️ สูงมาก — วัดซ้ำหลังพัก และประเมินอาการ';else if(r.sys>=l.bpSysHigh||r.dia>=l.bpDiaHigh)t='⚠️ สูงกว่าค่าเตือน';else if(r.sys<l.bpSysLow||r.dia<l.bpDiaLow)t='⚠️ ต่ำกว่าค่าเตือน';else t='อยู่ในช่วงเกณฑ์เตือนที่ตั้งไว้';$('bpstatus').textContent=t;}}
+function renderHome(){const p=JSON.parse(localStorage.getItem('profile')||'{}');const full=[p.firstName,p.lastName].filter(Boolean).join(' ');$('homeProfile').textContent=full?(full+(p.age?' • อายุ '+p.age+' ปี':'')):'ยังไม่ได้กรอกข้อมูลผู้ใช้งาน';let r=records[0];if(!r)return;$('bp').textContent=r.sys!==null&&r.dia!==null?r.sys+' / '+r.dia:'—';$('pulseBp').textContent=r.pb??'—';$('spo').textContent=r.sp!==null?r.sp+'%':'—';$('homeResp').textContent=r.resp??'—';$('sugar').textContent=r.gl??'—';$('temp').textContent=r.te!==null?r.te+' °C':'—';$('homeWeight').textContent=r.weight!=null?r.weight+' kg':'—';$('homeHeight').textContent=r.height!=null?r.height+' cm':'—';$('homeBmi').textContent=(r.weight>0&&r.height>0)?'BMI '+(r.weight/Math.pow(r.height/100,2)).toFixed(1):'BMI —';if(r.sys!==null&&r.dia!==null){const l={bpSysHigh:140,bpDiaHigh:90,bpSysLow:90,bpDiaLow:60,...JSON.parse(localStorage.getItem('limits')||'{}')};let t='ค่าความดันล่าสุด';if(r.sys>=180||r.dia>=120)t='⚠️ สูงมาก — วัดซ้ำหลังพัก และประเมินอาการ';else if(r.sys>=l.bpSysHigh||r.dia>=l.bpDiaHigh)t='⚠️ สูงกว่าค่าเตือน';else if(r.sys<l.bpSysLow||r.dia<l.bpDiaLow)t='⚠️ ต่ำกว่าค่าเตือน';else t='อยู่ในช่วงเกณฑ์เตือนที่ตั้งไว้';$('bpstatus').textContent=t;}}
 
 
 function renderHistory(){
@@ -667,7 +543,6 @@ function renderHistory(){
 }
 
 loadLimits();loadProfile();renderHome();
-try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist();}catch(e){}
 </script><script>
 
 // PWA install support. Installation is offered only when browser/platform allows it.
@@ -696,7 +571,7 @@ function openInstallDialog(manual=false){
   installDialogText.textContent='เบราว์เซอร์นี้ยังไม่ส่งคำสั่งติดตั้งอัตโนมัติ สามารถเพิ่มแอปจากเมนูของเบราว์เซอร์ได้';
   installDialogSteps.style.display='block';
   if(/iphone|ipad|ipod/i.test(navigator.userAgent)){
-   installDialogSteps.innerHTML='สำหรับ iPhone: เปิดลิงก์นี้ใน Safari → แตะปุ่มแชร์ → เลือก “เพิ่มไปยังหน้าจอโฮม” → แตะ “เพิ่ม” (ควรใช้งานผ่านไอคอนบนหน้าจอโฮม เพื่อไม่ให้ iOS ลบข้อมูลของเว็บอัตโนมัติ)';
+   installDialogSteps.innerHTML='สำหรับ iPhone: เปิดลิงก์นี้ใน Safari → แตะปุ่มแชร์ → เลือก “เพิ่มไปยังหน้าจอโฮม” → แตะ “เพิ่ม”';
    installNowButton.style.display='none';
   }else{
    installDialogSteps.innerHTML='สำหรับ Android: เปิดเว็บไซต์ด้วย Chrome → แตะเมนู ⋮ → เลือก “ติดตั้งแอป” หรือ “เพิ่มลงในหน้าจอหลัก” → ยืนยันติดตั้ง';
@@ -761,8 +636,7 @@ function setAppUpdateStatus(message,kind=''){
 function showPendingAppUpdate(worker){
  if(!worker)return;pendingAppWorker=worker;
  setAppUpdateStatus('พบเวอร์ชันใหม่แล้ว กด “อัปเดตตอนนี้” ในหน้าต่างแจ้งเตือนเพื่อใช้งานเวอร์ชันล่าสุด','warn');
- const bn=$('updateBanner');if(bn)bn.classList.add('show');const bg=$('moreBadge');if(bg)bg.hidden=false;const np=$('devNewPill');if(np)np.hidden=false;
- if(!sessionStorage.getItem('hmyUpdateLater')){const modal=$('appUpdateModal');if(modal)modal.classList.add('open');}
+ const modal=$('appUpdateModal');if(modal)modal.classList.add('open');
 }
 async function checkAppUpdate(manual=false){
  if(!('serviceWorker' in navigator)){setAppUpdateStatus('เบราว์เซอร์นี้ไม่รองรับการอัปเดตอัตโนมัติ','warn');return;}
@@ -794,10 +668,10 @@ async function checkAppUpdate(manual=false){
  }
 }
 function applyPendingAppUpdate(){
- if(pendingAppWorker){pendingAppWorker.postMessage('SKIP_WAITING');const b=$('applyAppUpdate');if(b){b.textContent='กำลังอัปเดต…';b.disabled=true;}setAppUpdateStatus('กำลังติดตั้งเวอร์ชันใหม่…');const ub=document.querySelector('#updateBanner button');if(ub){ub.textContent='กำลังอัปเดต…';ub.disabled=true;}}
+ if(pendingAppWorker){pendingAppWorker.postMessage('SKIP_WAITING');const b=$('applyAppUpdate');if(b){b.textContent='กำลังอัปเดต…';b.disabled=true;}setAppUpdateStatus('กำลังติดตั้งเวอร์ชันใหม่…');}
 }
 $('applyAppUpdate')?.addEventListener('click',applyPendingAppUpdate);
-$('laterAppUpdate')?.addEventListener('click',()=>{sessionStorage.setItem('hmyUpdateLater','1');$('appUpdateModal')?.classList.remove('open');});
+$('laterAppUpdate')?.addEventListener('click',()=>{$('appUpdateModal')?.classList.remove('open');});
 if('serviceWorker' in navigator && (location.protocol==='https:'||location.hostname==='localhost')){
  navigator.serviceWorker.addEventListener('controllerchange',()=>{
   if(sessionStorage.getItem('hmy-update-reloading')!=='1'){

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="gL" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f6fd0"/><stop offset="1" stop-color="#0a2a66"/>
+    </linearGradient>
+    <linearGradient id="gR" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3fcf8a"/><stop offset="1" stop-color="#0c7a4f"/>
+    </linearGradient>
+    <linearGradient id="gP" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f6d56a"/><stop offset=".55" stop-color="#e8b830"/><stop offset="1" stop-color="#c98f12"/>
+    </linearGradient>
+    <linearGradient id="gH" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe58a"/><stop offset="1" stop-color="#d9a21b"/>
+    </linearGradient>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#06214d" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <g filter="url(#sh)">
+    <!-- white outline layer (keeps icon readable on dark or light wallpapers) -->
+    <g fill="#fff" stroke="#fff" stroke-width="22" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="104" y="150" width="84" height="290" rx="42"/>
+      <rect x="324" y="150" width="84" height="290" rx="42"/>
+    </g>
+    <!-- stems -->
+    <rect x="104" y="150" width="84" height="290" rx="42" fill="url(#gL)"/>
+    <rect x="324" y="150" width="84" height="290" rx="42" fill="url(#gR)"/>
+    <rect x="118" y="164" width="22" height="200" rx="11" fill="#fff" opacity=".28"/>
+    <rect x="338" y="164" width="22" height="200" rx="11" fill="#fff" opacity=".28"/>
+    <!-- heartbeat crossbar -->
+    <path d="M150 300 H206 L238 214 L282 372 L312 300 H366" fill="none" stroke="#fff" stroke-width="58" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M150 300 H206 L238 214 L282 372 L312 300 H366" fill="none" stroke="url(#gP)" stroke-width="34" stroke-linejoin="round" stroke-linecap="round"/>
+  </g>
+  <!-- heart sprout growing from right stem -->
+  <g filter="url(#sh)">
+    <g transform="translate(366 122) rotate(14)">
+      <path id="hp" d="M0 62 C-52 20 -64 -6 -52 -28 C-40 -50 -10 -46 0 -22 C10 -46 40 -50 52 -28 C64 -6 52 20 0 62Z" fill="#fff" stroke="#fff" stroke-width="20" stroke-linejoin="round"/>
+      <path d="M0 62 C-52 20 -64 -6 -52 -28 C-40 -50 -10 -46 0 -22 C10 -46 40 -50 52 -28 C64 -6 52 20 0 62Z" fill="url(#gH)"/>
+      <path d="M-34 -14 C-34 -28 -20 -34 -10 -26" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="7" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>

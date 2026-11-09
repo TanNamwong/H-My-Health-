@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#24497e"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="H My Health"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon-192.png"><link rel="apple-touch-icon" href="./icon-192.png"><title>H My Health</title>
+<meta name="theme-color" content="#24497e"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="H My Health"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon-192.png"><link rel="apple-touch-icon" href="./icon-maskable-192.png"><title>H My Health</title>
 <style>
 /* ==========================================================
    H My Health — Navy · Teal · Gold theme (V12)
@@ -49,6 +49,17 @@ nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(100%,7
 .nav-fab.active::after{display:none}
 .nav-fab.active .fab{box-shadow:0 0 0 3px rgba(36,73,126,.28),0 6px 16px rgba(207,165,81,.55)}
 
+/* ---------- Update notice ---------- */
+.update-banner{display:none;align-items:center;gap:11px;margin:12px 14px 0;max-width:732px;padding:11px 12px 11px 14px;border-radius:18px;background:linear-gradient(120deg,#fff8e6,#fbeac0);border:1.5px solid var(--gold);box-shadow:0 6px 16px rgba(207,165,81,.3)}
+@media(min-width:790px){.update-banner{margin:12px auto 0}}
+.update-banner.show{display:flex}
+.update-banner .ub-ico{font-size:24px;animation:bob 2.2s ease-in-out infinite}
+.update-banner .ub-txt{flex:1;min-width:0;font-size:13.5px;line-height:1.4;color:#6b4d0f}.update-banner .ub-txt b{display:block;font-size:15px;color:var(--navy)}
+.update-banner button{padding:10px 14px;font-size:14px;border-radius:13px;white-space:nowrap}
+.nav-badge{position:absolute;top:5px;right:calc(50% - 20px);width:11px;height:11px;border-radius:50%;background:#d6453f;border:2px solid #fff}
+.nav-badge[hidden]{display:none}
+.new-pill{margin-left:auto;background:#d6453f;color:#fff;font-size:11px;font-weight:800;border-radius:99px;padding:2px 9px}.new-pill[hidden]{display:none}
+.new-pill+.chev{margin-left:8px}
 /* ---------- More sheet ---------- */
 .sheet-backdrop{position:fixed;inset:0;z-index:60;background:rgba(18,36,66,.5);display:none;align-items:flex-end;justify-content:center}
 .sheet-backdrop.open{display:flex;animation:fade .18s}
@@ -275,14 +286,15 @@ canvas{width:100%;height:175px;display:block;background:#fff;border:1px solid va
 </style></head><body>
 <div id="appUpdateModal" class="no-print" role="dialog" aria-modal="true" aria-labelledby="appUpdateTitle"><div class="app-update-box"><div style="font-size:38px">🔄</div><h2 id="appUpdateTitle">มีเวอร์ชันใหม่ของ H My Health</h2><p>อัปเดตแอปได้ทันทีโดยไม่ต้องลบหรือติดตั้งใหม่ ข้อมูลสุขภาพที่บันทึกไว้ในเครื่องจะไม่ถูกลบ</p><button id="applyAppUpdate" class="blue" type="button">อัปเดตตอนนี้</button><button id="laterAppUpdate" class="light" type="button">ไว้ภายหลัง</button></div></div>
 <header><div class="brand"><img src="./icon-192.png" alt="" width="46" height="46"><h1>H My Health</h1></div><p class="brand-sub">บันทึกและติดตามสุขภาพส่วนบุคคล</p><span id="headerDate" class="header-date"></span></header>
+<div id="updateBanner" class="update-banner no-print" role="status" aria-live="polite"><span class="ub-ico">🔔</span><div class="ub-txt"><b>มีเวอร์ชันใหม่พร้อมอัปเดต</b>ข้อมูลสุขภาพของคุณจะไม่ถูกลบ</div><button type="button" class="blue" onclick="applyPendingAppUpdate()">อัปเดต</button></div>
 <nav aria-label="เมนูหลัก">
 <button type="button" class="nav-btn active" data-nav="home" onclick="show('home')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg><span>หน้าหลัก</span></button>
 <button type="button" class="nav-btn" data-nav="history" onclick="show('history')"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>ประวัติ</span></button>
 <button type="button" class="nav-btn nav-fab" data-nav="entry" onclick="show('entry')" aria-label="บันทึกสุขภาพ"><span class="fab"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span><span>บันทึก</span></button>
 <button type="button" class="nav-btn" data-nav="reportView" onclick="show('reportView')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l5 5v13H6z"/><path d="M14 3v5h5"/><path d="M9 18v-3M12 18v-5M15 18v-2"/></svg><span>รายงาน</span></button>
-<button type="button" class="nav-btn" data-nav="more" onclick="openMore()" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg><span>เพิ่มเติม</span></button>
+<button type="button" class="nav-btn" data-nav="more" onclick="openMore()" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg><span>เพิ่มเติม</span><i class="nav-badge" id="moreBadge" hidden></i></button>
 </nav>
-<div id="moreSheet" class="sheet-backdrop no-print" onclick="if(event.target===this)closeMore()"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="moreTitle"><div class="sheet-grip"></div><h3 id="moreTitle">เมนูเพิ่มเติม</h3><button type="button" class="sheet-item" data-page="profile" onclick="show('profile')"><span class="sheet-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span><span><b>ข้อมูลผู้ใช้งาน</b><small>โปรไฟล์ ยา ประวัติแพ้ยา และข้อมูลฉุกเฉิน</small></span><span class="chev">›</span></button><button type="button" class="sheet-item" data-page="appointments" onclick="show('appointments')"><span class="sheet-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><span><b>นัดตรวจ</b><small>บันทึกวัน เวลา และสถานพยาบาล</small></span><span class="chev">›</span></button><button type="button" class="sheet-item" data-page="settings" onclick="show('settings')"><span class="sheet-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg></span><span><b>ตั้งค่า</b><small>เกณฑ์เฝ้าระวัง PIN และสำรองข้อมูล</small></span><span class="chev">›</span></button><button type="button" class="sheet-item" data-page="guide" onclick="show('guide')"><span class="sheet-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2z"/><path d="M4 21V5"/><path d="M9 8h6"/></svg></span><span><b>วิธีใช้งาน</b><small>คู่มือพร้อมภาพประกอบ</small></span><span class="chev">›</span></button><button type="button" class="sheet-item" data-page="developer" onclick="show('developer')"><span class="sheet-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="11" r="2.5"/><path d="M5.5 17c.6-2 2-3 3.5-3s2.9 1 3.5 3M15 10h3M15 14h3"/></svg></span><span><b>ผู้พัฒนา</b><small>ข้อมูลผู้จัดทำและอัปเดตแอป</small></span><span class="chev">›</span></button></div></div>
+<div id="moreSheet" class="sheet-backdrop no-print" onclick="if(event.target===this)closeMore()"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="moreTitle"><div class="sheet-grip"></div><h3 id="moreTitle">เมนูเพิ่มเติม</h3><button type="button" class="sheet-item" data-page="profile" onclick="show('profile')"><span class="sheet-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span><span><b>ข้อมูลผู้ใช้งาน</b><small>โปรไฟล์ ยา ประวัติแพ้ยา และข้อมูลฉุกเฉิน</small></span><span class="chev">›</span></button><button type="button" class="sheet-item" data-page="appointments" onclick="show('appointments')"><span class="sheet-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><span><b>นัดตรวจ</b><small>บันทึกวัน เวลา และสถานพยาบาล</small></span><span class="chev">›</span></button><button type="button" class="sheet-item" data-page="settings" onclick="show('settings')"><span class="sheet-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg></span><span><b>ตั้งค่า</b><small>เกณฑ์เฝ้าระวัง PIN และสำรองข้อมูล</small></span><span class="chev">›</span></button><button type="button" class="sheet-item" data-page="guide" onclick="show('guide')"><span class="sheet-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2z"/><path d="M4 21V5"/><path d="M9 8h6"/></svg></span><span><b>วิธีใช้งาน</b><small>คู่มือพร้อมภาพประกอบ</small></span><span class="chev">›</span></button><button type="button" class="sheet-item" data-page="developer" onclick="show('developer')"><span class="sheet-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="11" r="2.5"/><path d="M5.5 17c.6-2 2-3 3.5-3s2.9 1 3.5 3M15 10h3M15 14h3"/></svg></span><span><b>ผู้พัฒนา</b><small>ข้อมูลผู้จัดทำและอัปเดตแอป</small></span><span class="new-pill" id="devNewPill" hidden>ใหม่</span><span class="chev">›</span></button></div></div>
 <div id="installOverlay" class="install-overlay no-print" role="dialog" aria-modal="true" aria-labelledby="installTitle">
  <div class="install-dialog">
   <div class="install-badge">📲</div>
@@ -448,11 +460,11 @@ canvas{width:100%;height:175px;display:block;background:#fff;border:1px solid va
 </section>
 <section id="guide" class="hidden"><div class="page-intro"><span class="eyebrow">USER GUIDE</span><h2>วิธีการใช้งาน H My Health</h2><p>แต่ละเมนูมีภาพประกอบแยกและขั้นตอนการใช้งาน</p></div><div id="guideCards" class="guide-grid"></div></section>
 <section id="developer" class="hidden developer-page">
- <div class="page-intro"><span class="eyebrow">APPLICATION INFORMATION</span><h2>ผู้พัฒนาแอปพลิเคชัน</h2><p>ข้อมูลผู้จัดทำและหน่วยงาน</p></div>
+ <div class="page-intro"><span class="eyebrow">APPLICATION INFORMATION</span><h2>ผู้พัฒนาแอปพลิเคชัน</h2><p>ข้อมูลผู้จัดทำแอป</p></div>
  <div class="dev-card">
   <div class="dev-hero"><span class="dev-bubble">สวัสดีครับ 👋</span><img src="./developer-character.png" alt="ภาพการ์ตูนผู้พัฒนาแอป ผู้ช่วยพยาบาลกำลังโบกมือ" width="560" height="912"></div>
   <div class="dev-body"><p class="dev-name">นายแทน นามวงค์</p><span class="dev-role">ผู้ช่วยพยาบาล</span>
-   <div class="dev-info"><span class="ico">🏥</span><div><small>หน่วยงาน</small><b>หอผู้ป่วยโรคหลอดเลือดสมอง</b></div></div>
+   
    <div class="dev-info"><span class="ico">📱</span><div><small>แอปพลิเคชัน</small><b>H My Health</b></div></div>
    <div class="dev-note"><strong>H My Health</strong> · เวอร์ชัน 11<br>แอปพลิเคชันสำหรับบันทึกและติดตามข้อมูลสุขภาพส่วนบุคคล</div></div>
  </div>
@@ -530,7 +542,7 @@ function save(){
 // Local-only backup, record editing and PIN protection
 function editRecord(id){const i=records.findIndex(r=>r.id===id);if(i<0)return;const r=records[i];const fields=[['sys','ความดันตัวบน'],['dia','ความดันตัวล่าง'],['pb','ชีพจร'],['sp','SpO₂'],['resp','อัตราการหายใจ'],['po','ชีพจรเดิมจากเครื่องปลายนิ้ว'],['gl','น้ำตาล'],['te','อุณหภูมิ'],['weight','น้ำหนัก'],['height','ส่วนสูง']];for(const [k,label] of fields){const v=prompt('แก้ไข'+label+' (เว้นว่างหากไม่มีค่า)',r[k]??'');if(v===null)return;r[k]=v.trim()===''?null:Number(v);if(r[k]!==null&&!Number.isFinite(r[k])){alert('กรุณากรอกเป็นตัวเลข');return;}}const note=prompt('แก้ไขหมายเหตุ',r.note||'');if(note===null)return;r.note=note;records[i]=r;localStorage.setItem('records',JSON.stringify(records));renderHistory();renderHome();alert('แก้ไขรายการแล้ว');}
 function deleteRecord(id){if(!confirm('ยืนยันลบรายการสุขภาพนี้? การลบไม่สามารถย้อนกลับได้'))return;records=records.filter(r=>r.id!==id);localStorage.setItem('records',JSON.stringify(records));renderHistory();renderHome();}
-function exportBackup(){const keys=['records','profile','medicationItems','medicationLog','allergyHistory','limits','appointments'];const data={app:'H My Health',version:11,createdAt:new Date().toISOString(),data:{}};keys.forEach(k=>{const v=localStorage.getItem(k);if(v!==null)data.data[k]=JSON.parse(v)});const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='MyHealthRecord-Backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function exportBackup(){const keys=['records','profile','medicationItems','medicationLog','allergyHistory','limits','appointments'];const data={app:'H My Health',version:11,createdAt:new Date().toISOString(),data:{}};keys.forEach(k=>{const v=localStorage.getItem(k);if(v!==null)data.data[k]=JSON.parse(v)});const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const fname='MyHealthRecord-Backup-'+new Date().toISOString().slice(0,10)+'.json';try{const f=new File([blob],fname,{type:'application/json'});if(navigator.canShare&&navigator.canShare({files:[f]})&&/iphone|ipad|ipod/i.test(navigator.userAgent)){navigator.share({files:[f],title:'สำรองข้อมูล H My Health'}).catch(()=>{});return;}}catch(e){}const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='MyHealthRecord-Backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function restoreBackup(ev){const file=ev.target.files&&ev.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const b=JSON.parse(reader.result);if(!b||b.app!=='H My Health'||!b.data||!Array.isArray(b.data.records))throw new Error('รูปแบบไฟล์ไม่ถูกต้อง');if(!confirm('กู้คืนข้อมูลจากไฟล์นี้หรือไม่? ข้อมูลปัจจุบันในอุปกรณ์จะถูกแทนที่'))return;['records','profile','medicationItems','medicationLog','allergyHistory','limits','appointments'].forEach(k=>{if(Object.prototype.hasOwnProperty.call(b.data,k))localStorage.setItem(k,JSON.stringify(b.data[k]));else localStorage.removeItem(k)});records=JSON.parse(localStorage.getItem('records')||'[]');alert('กู้คืนข้อมูลเรียบร้อยแล้ว');location.reload();}catch(e){alert('ไม่สามารถกู้คืนได้: '+e.message)}finally{ev.target.value='';}};reader.readAsText(file);}
 async function pinHash(pin,salt){const bytes=new TextEncoder().encode(salt+':'+pin);if(window.crypto&&crypto.subtle){const digest=await crypto.subtle.digest('SHA-256',bytes);return Array.from(new Uint8Array(digest)).map(x=>x.toString(16).padStart(2,'0')).join('')}return btoa(unescape(encodeURIComponent(salt+':'+pin)));}
 async function setupPin(){const pin=prompt('ตั้งรหัส PIN 6 หลัก (กด ยกเลิก หากไม่ต้องการใช้)');if(pin===null)return;if(!/^\d{6}$/.test(pin)){alert('กรุณาตั้ง PIN เป็นตัวเลข 6 หลัก');return;}const again=prompt('กรอกรหัส PIN ซ้ำอีกครั้ง');if(again!==pin){alert('รหัส PIN ไม่ตรงกัน');return;}const salt=window.crypto&&window.crypto.getRandomValues?Array.from(window.crypto.getRandomValues(new Uint8Array(16))).map(x=>x.toString(16).padStart(2,'0')).join(''):String(Date.now());localStorage.setItem('appPin',JSON.stringify({salt,hash:await pinHash(pin,salt)}));alert('ตั้ง PIN แล้ว จะขอ PIN เมื่อเปิดแอปครั้งถัดไป');}
@@ -655,6 +667,7 @@ function renderHistory(){
 }
 
 loadLimits();loadProfile();renderHome();
+try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist();}catch(e){}
 </script><script>
 
 // PWA install support. Installation is offered only when browser/platform allows it.
@@ -683,7 +696,7 @@ function openInstallDialog(manual=false){
   installDialogText.textContent='เบราว์เซอร์นี้ยังไม่ส่งคำสั่งติดตั้งอัตโนมัติ สามารถเพิ่มแอปจากเมนูของเบราว์เซอร์ได้';
   installDialogSteps.style.display='block';
   if(/iphone|ipad|ipod/i.test(navigator.userAgent)){
-   installDialogSteps.innerHTML='สำหรับ iPhone: เปิดลิงก์นี้ใน Safari → แตะปุ่มแชร์ → เลือก “เพิ่มไปยังหน้าจอโฮม” → แตะ “เพิ่ม”';
+   installDialogSteps.innerHTML='สำหรับ iPhone: เปิดลิงก์นี้ใน Safari → แตะปุ่มแชร์ → เลือก “เพิ่มไปยังหน้าจอโฮม” → แตะ “เพิ่ม” (ควรใช้งานผ่านไอคอนบนหน้าจอโฮม เพื่อไม่ให้ iOS ลบข้อมูลของเว็บอัตโนมัติ)';
    installNowButton.style.display='none';
   }else{
    installDialogSteps.innerHTML='สำหรับ Android: เปิดเว็บไซต์ด้วย Chrome → แตะเมนู ⋮ → เลือก “ติดตั้งแอป” หรือ “เพิ่มลงในหน้าจอหลัก” → ยืนยันติดตั้ง';
@@ -748,7 +761,8 @@ function setAppUpdateStatus(message,kind=''){
 function showPendingAppUpdate(worker){
  if(!worker)return;pendingAppWorker=worker;
  setAppUpdateStatus('พบเวอร์ชันใหม่แล้ว กด “อัปเดตตอนนี้” ในหน้าต่างแจ้งเตือนเพื่อใช้งานเวอร์ชันล่าสุด','warn');
- const modal=$('appUpdateModal');if(modal)modal.classList.add('open');
+ const bn=$('updateBanner');if(bn)bn.classList.add('show');const bg=$('moreBadge');if(bg)bg.hidden=false;const np=$('devNewPill');if(np)np.hidden=false;
+ if(!sessionStorage.getItem('hmyUpdateLater')){const modal=$('appUpdateModal');if(modal)modal.classList.add('open');}
 }
 async function checkAppUpdate(manual=false){
  if(!('serviceWorker' in navigator)){setAppUpdateStatus('เบราว์เซอร์นี้ไม่รองรับการอัปเดตอัตโนมัติ','warn');return;}
@@ -780,10 +794,10 @@ async function checkAppUpdate(manual=false){
  }
 }
 function applyPendingAppUpdate(){
- if(pendingAppWorker){pendingAppWorker.postMessage('SKIP_WAITING');const b=$('applyAppUpdate');if(b){b.textContent='กำลังอัปเดต…';b.disabled=true;}setAppUpdateStatus('กำลังติดตั้งเวอร์ชันใหม่…');}
+ if(pendingAppWorker){pendingAppWorker.postMessage('SKIP_WAITING');const b=$('applyAppUpdate');if(b){b.textContent='กำลังอัปเดต…';b.disabled=true;}setAppUpdateStatus('กำลังติดตั้งเวอร์ชันใหม่…');const ub=document.querySelector('#updateBanner button');if(ub){ub.textContent='กำลังอัปเดต…';ub.disabled=true;}}
 }
 $('applyAppUpdate')?.addEventListener('click',applyPendingAppUpdate);
-$('laterAppUpdate')?.addEventListener('click',()=>{$('appUpdateModal')?.classList.remove('open');});
+$('laterAppUpdate')?.addEventListener('click',()=>{sessionStorage.setItem('hmyUpdateLater','1');$('appUpdateModal')?.classList.remove('open');});
 if('serviceWorker' in navigator && (location.protocol==='https:'||location.hostname==='localhost')){
  navigator.serviceWorker.addEventListener('controllerchange',()=>{
   if(sessionStorage.getItem('hmy-update-reloading')!=='1'){

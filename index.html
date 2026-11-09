@@ -177,10 +177,11 @@ h2{font-size:21px;color:#173d5c}
 #healthAlertModal.open{display:flex}.health-alert-box{width:min(100%,520px);max-height:85vh;overflow:auto;background:#fff;border-radius:22px;padding:24px;box-shadow:0 18px 55px #0005;border-top:7px solid #d94b45;text-align:center}.health-alert-box h2{color:#a52d2d;font-size:25px}.health-alert-box p{font-size:18px;line-height:1.6;color:#34465a;text-align:left}.health-alert-box button{width:100%;margin-top:10px}
 #appUpdateModal{display:none;position:fixed;inset:0;z-index:10001;background:rgba(12,28,45,.62);padding:18px;align-items:center;justify-content:center}
 #appUpdateModal.open{display:flex}.app-update-box{width:min(100%,480px);background:#fff;border-radius:22px;padding:24px;box-shadow:0 18px 55px #0005;text-align:center}.app-update-box h2{color:#155b91}.app-update-box p{line-height:1.6;color:#43566a}.app-update-box button{width:100%;margin-top:9px}
+.update-status{font-size:14px;line-height:1.55;color:#52677b;background:#f1f7fc;border-radius:12px;padding:11px 13px;margin:10px 0}.update-status.ok{background:#eaf8ef;color:#176b3a}.update-status.warn{background:#fff5e8;color:#8a4b08}.update-menu-btn{white-space:nowrap}
 </style></head><body>
 <div id="appUpdateModal" class="no-print" role="dialog" aria-modal="true" aria-labelledby="appUpdateTitle"><div class="app-update-box"><div style="font-size:38px">🔄</div><h2 id="appUpdateTitle">มีเวอร์ชันใหม่ของ H My Health</h2><p>อัปเดตแอปได้ทันทีโดยไม่ต้องลบหรือติดตั้งใหม่ ข้อมูลสุขภาพที่บันทึกไว้ในเครื่องจะไม่ถูกลบ</p><button id="applyAppUpdate" class="blue" type="button">อัปเดตตอนนี้</button><button id="laterAppUpdate" class="light" type="button">ไว้ภายหลัง</button></div></div>
 <header><h1>❤️ H My Health</h1><p id="headerDate" class="header-date"></p></header>
-<nav><button class="blue" onclick="show('home')">หน้าหลัก</button><button class="light" onclick="show('profile')">ผู้ใช้งาน</button><button class="light" onclick="show('history')">ประวัติ</button><button class="light" onclick="show('settings')">ตั้งค่า</button><button class="light" onclick="show('appointments')">นัดตรวจ</button><button class="light" onclick="show('guide')">วิธีใช้งาน</button><button class="light" onclick="show('developer')">ผู้พัฒนา</button></nav>
+<nav><button class="blue" onclick="show('home')">หน้าหลัก</button><button class="light" onclick="show('profile')">ผู้ใช้งาน</button><button class="light" onclick="show('history')">ประวัติ</button><button class="light" onclick="show('settings')">ตั้งค่า</button><button class="light" onclick="show('appointments')">นัดตรวจ</button><button class="light" onclick="show('guide')">วิธีใช้งาน</button><button class="light" onclick="show('developer')">ผู้พัฒนา</button><button class="light update-menu-btn" onclick="openUpdateMenu()">🔄 อัปเดต</button></nav>
 <div id="installPanel" class="card no-print" style="margin:12px 14px;padding:13px;border:2px solid #b8d8f5;display:none">
  <div style="font-weight:800;font-size:18px">📲 ติดตั้ง H My Health ลงเครื่อง</div>
  <div id="installHelp" class="small" style="margin:5px 0 9px">ติดตั้งเพื่อเพิ่มไอคอนไว้ที่หน้าจอ แล้วแตะเข้าใช้งานได้สะดวก</div>
@@ -295,6 +296,7 @@ h2{font-size:21px;color:#173d5c}
 </section><section id="history" class="hidden"><div class="card"><h2>ประวัติสุขภาพ</h2><p class="small">แยกสีแต่ละค่า เพื่อให้อ่านง่ายและดูย้อนหลังได้สะดวก</p><div id="list">ยังไม่มีข้อมูล</div><button class="light" onclick="show('home')">กลับหน้าหลัก</button></div></section>
 <section id="settings" class="hidden settings-page">
  <div class="page-intro"><span class="eyebrow">HEALTH THRESHOLDS</span><h2>ตั้งค่าเกณฑ์สุขภาพ</h2><p>กำหนดค่าที่ควรสังเกตเมื่อบันทึกข้อมูลสุขภาพ</p></div>
+ <div class="security-card" id="updateSettingsCard"><h3>🔄 อัปเดต H My Health</h3><p>ตรวจสอบเวอร์ชันใหม่และติดตั้งได้โดยไม่ต้องลบแอป ข้อมูลสุขภาพในอุปกรณ์จะไม่ถูกลบ</p><div id="appUpdateStatus" class="update-status" role="status" aria-live="polite">ยังไม่ได้ตรวจสอบเวอร์ชัน กดปุ่มเพื่อตรวจสอบเมื่อเชื่อมต่ออินเทอร์เน็ต</div><button class="blue" style="width:100%;min-height:48px" type="button" onclick="checkAppUpdate(true)">ตรวจสอบเวอร์ชันใหม่</button></div>
  <div class="settings-card">
   <div class="settings-title"><span class="settings-icon">❤️</span><div><h3>เกณฑ์เฝ้าระวังความดัน</h3><p>Blood pressure · mmHg</p></div></div>
   <div class="settings-grid">
@@ -625,20 +627,71 @@ if(!isStandaloneApp()){
   installDialogText.textContent='เพิ่ม H My Health ไว้บนหน้าจอ iPhone เพื่อเปิดใช้งานได้สะดวก';
  }
 }
-// In-place PWA updates: check on launch, when returning to the app, and every 6 hours.
-if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost')){
- let pendingWorker=null; const updateModal=$('appUpdateModal');
- const applyUpdate=()=>{if(pendingWorker){pendingWorker.postMessage('SKIP_WAITING');$('applyAppUpdate').textContent='กำลังอัปเดต…';$('applyAppUpdate').disabled=true;}};
- $('applyAppUpdate')?.addEventListener('click',applyUpdate);
- $('laterAppUpdate')?.addEventListener('click',()=>updateModal.classList.remove('open'));
- navigator.serviceWorker.addEventListener('controllerchange',()=>{if(sessionStorage.getItem('hmy-update-reloading')!=='1'){sessionStorage.setItem('hmy-update-reloading','1');location.reload();}});
+// In-place PWA updates with a visible manual update menu.
+let appUpdateRegistration=null;
+let pendingAppWorker=null;
+function setAppUpdateStatus(message,kind=''){
+ const el=$('appUpdateStatus');if(el){el.textContent=message;el.className='update-status'+(kind?' '+kind:'');}
+}
+function openUpdateMenu(){show('settings');setTimeout(()=>checkAppUpdate(false),80);}
+function showPendingAppUpdate(worker){
+ if(!worker)return;pendingAppWorker=worker;
+ setAppUpdateStatus('พบเวอร์ชันใหม่แล้ว กด “อัปเดตตอนนี้” ในหน้าต่างแจ้งเตือนเพื่อใช้งานเวอร์ชันล่าสุด','warn');
+ const modal=$('appUpdateModal');if(modal)modal.classList.add('open');
+}
+async function checkAppUpdate(manual=false){
+ if(!('serviceWorker' in navigator)){setAppUpdateStatus('เบราว์เซอร์นี้ไม่รองรับการอัปเดตอัตโนมัติ','warn');return;}
+ if(!navigator.onLine){setAppUpdateStatus('ขณะนี้ออฟไลน์ กรุณาเชื่อมต่ออินเทอร์เน็ตเพื่อตรวจสอบเวอร์ชันใหม่','warn');return;}
+ setAppUpdateStatus('กำลังตรวจสอบเวอร์ชันล่าสุด…');
+ try{
+  const reg=appUpdateRegistration||await navigator.serviceWorker.register('./service-worker.js',{scope:'./'});
+  appUpdateRegistration=reg;
+  if(reg.waiting&&navigator.serviceWorker.controller){showPendingAppUpdate(reg.waiting);return;}
+  let found=false;
+  const inspect=()=>{if(reg.waiting&&navigator.serviceWorker.controller){found=true;showPendingAppUpdate(reg.waiting);}};
+  inspect();
+  reg.addEventListener('updatefound',()=>{
+   const worker=reg.installing;if(!worker)return;
+   worker.addEventListener('statechange',()=>{
+    if(worker.state==='installed'&&navigator.serviceWorker.controller){found=true;showPendingAppUpdate(worker);}
+   });
+  },{once:true});
+  await reg.update();
+  // Give a newly found worker time to finish installation before reporting status.
+  setTimeout(()=>{
+   inspect();
+   if(!found&&!reg.installing&&!reg.waiting)setAppUpdateStatus('คุณใช้ H My Health เวอร์ชันล่าสุดแล้ว','ok');
+   else if(!found)setAppUpdateStatus('กำลังดาวน์โหลดไฟล์อัปเดต… กรุณารอสักครู่');
+  },1800);
+ }catch(err){
+  console.log('App update check:',err);
+  setAppUpdateStatus('ตรวจสอบไม่สำเร็จ กรุณาลองใหม่เมื่ออินเทอร์เน็ตพร้อม','warn');
+ }
+}
+function applyPendingAppUpdate(){
+ if(pendingAppWorker){pendingAppWorker.postMessage('SKIP_WAITING');const b=$('applyAppUpdate');if(b){b.textContent='กำลังอัปเดต…';b.disabled=true;}setAppUpdateStatus('กำลังติดตั้งเวอร์ชันใหม่…');}
+}
+$('applyAppUpdate')?.addEventListener('click',applyPendingAppUpdate);
+$('laterAppUpdate')?.addEventListener('click',()=>{$('appUpdateModal')?.classList.remove('open');});
+if('serviceWorker' in navigator && (location.protocol==='https:'||location.hostname==='localhost')){
+ navigator.serviceWorker.addEventListener('controllerchange',()=>{
+  if(sessionStorage.getItem('hmy-update-reloading')!=='1'){
+   sessionStorage.setItem('hmy-update-reloading','1');location.reload();
+  }
+ });
  window.addEventListener('load',async()=>{
-  try{const reg=await navigator.serviceWorker.register('./service-worker.js',{scope:'./'});
-   const inspect=()=>{if(reg.waiting&&navigator.serviceWorker.controller){pendingWorker=reg.waiting;updateModal.classList.add('open');}};
-   inspect(); reg.addEventListener('updatefound',()=>{const worker=reg.installing;if(!worker)return;worker.addEventListener('statechange',()=>{if(worker.state==='installed'&&navigator.serviceWorker.controller){pendingWorker=worker;updateModal.classList.add('open');}});});
-   const check=()=>{if(navigator.onLine)reg.update().catch(()=>{});};
-   window.addEventListener('focus',check);document.addEventListener('visibilitychange',()=>{if(!document.hidden)check();});setInterval(check,6*60*60*1000);
-   // Clear the one-session reload guard after the updated page has loaded.
+  try{
+   appUpdateRegistration=await navigator.serviceWorker.register('./service-worker.js',{scope:'./'});
+   const inspect=()=>{if(appUpdateRegistration.waiting&&navigator.serviceWorker.controller)showPendingAppUpdate(appUpdateRegistration.waiting);};
+   inspect();
+   appUpdateRegistration.addEventListener('updatefound',()=>{
+    const worker=appUpdateRegistration.installing;if(!worker)return;
+    worker.addEventListener('statechange',()=>{if(worker.state==='installed'&&navigator.serviceWorker.controller)showPendingAppUpdate(worker);});
+   });
+   const check=()=>{if(navigator.onLine)checkAppUpdate(false);};
+   window.addEventListener('focus',check);
+   document.addEventListener('visibilitychange',()=>{if(!document.hidden)check();});
+   setInterval(check,6*60*60*1000);
    sessionStorage.removeItem('hmy-update-reloading');
   }catch(err){console.log('Service worker:',err);}
  });

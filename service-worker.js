@@ -1,5 +1,5 @@
 // H My Health — offline-first app shell with user-approved in-place updates.
-const CACHE_NAME = 'h-my-health-v11-1-auto-update';
+const CACHE_NAME = 'h-my-health-v11-2-visible-update-menu';
 const APP_ROOT = new URL('./', self.registration.scope);
 const CORE_PATHS = [
  './','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png',

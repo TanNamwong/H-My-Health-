@@ -1,11 +1,12 @@
 // H My Health — offline-first app shell with user-approved in-place updates.
-const CACHE_NAME = 'h-my-health-v11-3-developer-auto-update';
+const CACHE_NAME = 'h-my-health-v12-navy-gold-bottom-nav';
 const APP_ROOT = new URL('./', self.registration.scope);
 const CORE_PATHS = [
- './','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png',
+ './','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-192.png','./icon-maskable-512.png','./developer-character.png',
  './guide-home.svg','./guide-profile.svg','./guide-entry.svg','./guide-reportView.svg',
  './guide-history.svg','./guide-settings.svg','./guide-appointments.svg',
- './guide-emergency.svg','./guide-medication.svg','./guide-developer.svg'
+ './guide-emergency.svg','./guide-medication.svg','./guide-developer.svg',
+ './guide-home.png','./guide-profile.png','./guide-entry.png','./guide-reportView.png','./guide-history.png','./guide-settings.png','./guide-appointments.png','./guide-emergency.png','./guide-medication.png','./guide-developer.png'
 ];
 self.addEventListener('install', event => {
  event.waitUntil((async()=>{

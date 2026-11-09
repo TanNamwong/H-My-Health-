@@ -181,7 +181,7 @@ h2{font-size:21px;color:#173d5c}
 </style></head><body>
 <div id="appUpdateModal" class="no-print" role="dialog" aria-modal="true" aria-labelledby="appUpdateTitle"><div class="app-update-box"><div style="font-size:38px">🔄</div><h2 id="appUpdateTitle">มีเวอร์ชันใหม่ของ H My Health</h2><p>อัปเดตแอปได้ทันทีโดยไม่ต้องลบหรือติดตั้งใหม่ ข้อมูลสุขภาพที่บันทึกไว้ในเครื่องจะไม่ถูกลบ</p><button id="applyAppUpdate" class="blue" type="button">อัปเดตตอนนี้</button><button id="laterAppUpdate" class="light" type="button">ไว้ภายหลัง</button></div></div>
 <header><h1>❤️ H My Health</h1><p id="headerDate" class="header-date"></p></header>
-<nav><button class="blue" onclick="show('home')">หน้าหลัก</button><button class="light" onclick="show('profile')">ผู้ใช้งาน</button><button class="light" onclick="show('history')">ประวัติ</button><button class="light" onclick="show('settings')">ตั้งค่า</button><button class="light" onclick="show('appointments')">นัดตรวจ</button><button class="light" onclick="show('guide')">วิธีใช้งาน</button><button class="light" onclick="show('developer')">ผู้พัฒนา</button><button class="light update-menu-btn" onclick="openUpdateMenu()">🔄 อัปเดต</button></nav>
+<nav><button class="blue" onclick="show('home')">หน้าหลัก</button><button class="light" onclick="show('profile')">ผู้ใช้งาน</button><button class="light" onclick="show('history')">ประวัติ</button><button class="light" onclick="show('settings')">ตั้งค่า</button><button class="light" onclick="show('appointments')">นัดตรวจ</button><button class="light" onclick="show('guide')">วิธีใช้งาน</button><button class="light" onclick="show('developer')">ผู้พัฒนา</button></nav>
 <div id="installPanel" class="card no-print" style="margin:12px 14px;padding:13px;border:2px solid #b8d8f5;display:none">
  <div style="font-weight:800;font-size:18px">📲 ติดตั้ง H My Health ลงเครื่อง</div>
  <div id="installHelp" class="small" style="margin:5px 0 9px">ติดตั้งเพื่อเพิ่มไอคอนไว้ที่หน้าจอ แล้วแตะเข้าใช้งานได้สะดวก</div>
@@ -296,7 +296,6 @@ h2{font-size:21px;color:#173d5c}
 </section><section id="history" class="hidden"><div class="card"><h2>ประวัติสุขภาพ</h2><p class="small">แยกสีแต่ละค่า เพื่อให้อ่านง่ายและดูย้อนหลังได้สะดวก</p><div id="list">ยังไม่มีข้อมูล</div><button class="light" onclick="show('home')">กลับหน้าหลัก</button></div></section>
 <section id="settings" class="hidden settings-page">
  <div class="page-intro"><span class="eyebrow">HEALTH THRESHOLDS</span><h2>ตั้งค่าเกณฑ์สุขภาพ</h2><p>กำหนดค่าที่ควรสังเกตเมื่อบันทึกข้อมูลสุขภาพ</p></div>
- <div class="security-card" id="updateSettingsCard"><h3>🔄 อัปเดต H My Health</h3><p>ตรวจสอบเวอร์ชันใหม่และติดตั้งได้โดยไม่ต้องลบแอป ข้อมูลสุขภาพในอุปกรณ์จะไม่ถูกลบ</p><div id="appUpdateStatus" class="update-status" role="status" aria-live="polite">ยังไม่ได้ตรวจสอบเวอร์ชัน กดปุ่มเพื่อตรวจสอบเมื่อเชื่อมต่ออินเทอร์เน็ต</div><button class="blue" style="width:100%;min-height:48px" type="button" onclick="checkAppUpdate(true)">ตรวจสอบเวอร์ชันใหม่</button></div>
  <div class="settings-card">
   <div class="settings-title"><span class="settings-icon">❤️</span><div><h3>เกณฑ์เฝ้าระวังความดัน</h3><p>Blood pressure · mmHg</p></div></div>
   <div class="settings-grid">
@@ -350,6 +349,7 @@ h2{font-size:21px;color:#173d5c}
 \n<section id="developer" class="hidden developer-page">
  <div class="page-intro"><span class="eyebrow">APPLICATION INFORMATION</span><h2>ผู้พัฒนาแอปพลิเคชัน</h2><p>ข้อมูลผู้จัดทำและหน่วยงาน</p></div>
  <div class="developer-card"><div class="developer-avatar">T</div><p class="developer-name">นายแทน นามวงค์</p><div class="developer-role">ผู้ช่วยพยาบาล</div><div class="developer-unit">หอผู้ป่วยโรคหลอดเลือดสมอง</div><div class="developer-note">H My Health<br>แอปพลิเคชันสำหรับบันทึกและติดตามข้อมูลสุขภาพส่วนบุคคล</div></div>
+ <div class="security-card" id="updateSettingsCard"><h3>🔄 อัปเดต H My Health</h3><p>แอปจะตรวจสอบเวอร์ชันใหม่ให้อัตโนมัติเมื่อเปิดใช้งานและเมื่อเชื่อมต่ออินเทอร์เน็ต หากพบเวอร์ชันใหม่จะแสดงหน้าต่างแจ้งเตือน ข้อมูลสุขภาพในอุปกรณ์จะไม่ถูกลบ</p><div id="appUpdateStatus" class="update-status" role="status" aria-live="polite">ระบบตรวจสอบเวอร์ชันใหม่อัตโนมัติ</div><button class="blue" style="width:100%;min-height:48px" type="button" onclick="checkAppUpdate(true)">ตรวจสอบเวอร์ชันใหม่</button></div>
  <button class="light" style="width:100%" onclick="show('home')">กลับหน้าหลัก</button>
 </section>
 
@@ -627,13 +627,12 @@ if(!isStandaloneApp()){
   installDialogText.textContent='เพิ่ม H My Health ไว้บนหน้าจอ iPhone เพื่อเปิดใช้งานได้สะดวก';
  }
 }
-// In-place PWA updates with a visible manual update menu.
+// In-place PWA updates; update controls live under Developer.
 let appUpdateRegistration=null;
 let pendingAppWorker=null;
 function setAppUpdateStatus(message,kind=''){
  const el=$('appUpdateStatus');if(el){el.textContent=message;el.className='update-status'+(kind?' '+kind:'');}
 }
-function openUpdateMenu(){show('settings');setTimeout(()=>checkAppUpdate(false),80);}
 function showPendingAppUpdate(worker){
  if(!worker)return;pendingAppWorker=worker;
  setAppUpdateStatus('พบเวอร์ชันใหม่แล้ว กด “อัปเดตตอนนี้” ในหน้าต่างแจ้งเตือนเพื่อใช้งานเวอร์ชันล่าสุด','warn');
@@ -686,12 +685,17 @@ if('serviceWorker' in navigator && (location.protocol==='https:'||location.hostn
    inspect();
    appUpdateRegistration.addEventListener('updatefound',()=>{
     const worker=appUpdateRegistration.installing;if(!worker)return;
-    worker.addEventListener('statechange',()=>{if(worker.state==='installed'&&navigator.serviceWorker.controller)showPendingAppUpdate(worker);});
+    worker.addEventListener('statechange',()=>{
+     if(worker.state==='installed'&&navigator.serviceWorker.controller)showPendingAppUpdate(worker);
+    });
    });
+   // Check on startup, when the app returns to foreground, and every 30 minutes while open.
    const check=()=>{if(navigator.onLine)checkAppUpdate(false);};
+   setTimeout(check,1200);
+   window.addEventListener('online',check);
    window.addEventListener('focus',check);
    document.addEventListener('visibilitychange',()=>{if(!document.hidden)check();});
-   setInterval(check,6*60*60*1000);
+   setInterval(check,30*60*1000);
    sessionStorage.removeItem('hmy-update-reloading');
   }catch(err){console.log('Service worker:',err);}
  });

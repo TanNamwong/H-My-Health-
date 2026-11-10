@@ -1,8 +1,9 @@
 // H My Health — offline-first app shell with user-approved in-place updates.
-const CACHE_NAME = 'h-my-health-v11-5-icon-navy-gold';
+const CACHE_NAME = 'h-my-health-v12-2-navy-gold-icon-h';
 const APP_ROOT = new URL('./', self.registration.scope);
 const CORE_PATHS = [
- './','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-512.png','./apple-touch-icon.png','./favicon-64.png','./icon.svg',
+ './','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-192.png','./icon-maskable-512.png','./apple-touch-icon.png','./favicon-64.png','./icon.svg','./developer-character.png',
+ './guide-home.png','./guide-profile.png','./guide-entry.png','./guide-reportView.png','./guide-history.png','./guide-settings.png','./guide-appointments.png','./guide-emergency.png','./guide-medication.png','./guide-developer.png',
  './guide-home.svg','./guide-profile.svg','./guide-entry.svg','./guide-reportView.svg',
  './guide-history.svg','./guide-settings.svg','./guide-appointments.svg',
  './guide-emergency.svg','./guide-medication.svg','./guide-developer.svg'

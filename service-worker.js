@@ -1,5 +1,5 @@
 // H My Health — offline-first app shell with user-approved in-place updates.
-const CACHE_NAME = 'h-my-health-v12-2-navy-gold-icon-h';
+const CACHE_NAME = 'h-my-health-v12-3-biometric-nav';
 const APP_ROOT = new URL('./', self.registration.scope);
 const CORE_PATHS = [
  './','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-maskable-192.png','./icon-maskable-512.png','./apple-touch-icon.png','./favicon-64.png','./icon.svg','./developer-character.png',

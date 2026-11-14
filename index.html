@@ -249,12 +249,31 @@ nav.tabbar .tab-fab.active span{color:var(--navy)}
  #reportView .report-controls #a4Report{display:block!important}
  @page{size:A4;margin:10mm}
 }
+
+/* V12.3 compact nav + more sheet */
+nav.tabbar{gap:0;padding-top:6px;padding-left:max(4px,calc((100% - 650px)/2));padding-right:max(4px,calc((100% - 650px)/2))}
+nav.tabbar button{font-size:11.5px;padding:6px 1px 5px;gap:2px;border-radius:14px}
+nav.tabbar button svg{width:22px;height:22px}
+nav.tabbar button.active::after{width:16px;height:2.5px;bottom:3px}
+nav.tabbar button.active span{margin-bottom:4px}
+nav.tabbar .tab-fab .fab{width:54px;height:54px;margin-top:-28px;border-width:4px}
+nav.tabbar .tab-fab .fab svg{width:26px;height:26px}
+.dot{top:3px;left:calc(50% + 6px);width:9px;height:9px}
+.more-box{width:min(100%,650px);padding:8px 14px calc(78px + env(safe-area-inset-bottom));border-radius:22px 22px 0 0}
+.more-grip{width:38px;height:4px;margin:0 auto 8px}
+.more-box h3{font-size:16px;margin:0 4px 4px}
+.more-item{gap:11px;padding:8px 11px;margin:5px 0;font-size:15.5px;border-radius:13px;font-weight:700}
+.more-item .mi{width:34px;height:34px;border-radius:11px;font-size:18px}
+.more-item small{font-size:12px;margin-top:1px}
+.new-badge{font-size:10.5px;padding:2px 7px;margin-left:6px}
+.bio-status{font-size:13px;color:#52647a;margin:6px 0 0}
+.pin-box .bio-btn{background:#e5f2fb;color:#24497e;border:1px solid #c7dcf0;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:800}
 </style></head><body>
 <div id="appUpdateModal" class="no-print" role="dialog" aria-modal="true" aria-labelledby="appUpdateTitle"><div class="app-update-box"><div style="font-size:38px">🔄</div><h2 id="appUpdateTitle">มีเวอร์ชันใหม่ของ H My Health</h2><p>อัปเดตแอปได้ทันทีโดยไม่ต้องลบหรือติดตั้งใหม่ ข้อมูลสุขภาพที่บันทึกไว้ในเครื่องจะไม่ถูกลบ</p><button id="applyAppUpdate" class="blue" type="button">อัปเดตตอนนี้</button><button id="laterAppUpdate" class="light" type="button">ไว้ภายหลัง</button></div></div>
 <header><div class="brand"><img src="./icon.svg" alt="" width="50" height="50"><div><h1>H My Health</h1><p id="headerDate" class="header-date"></p></div></div></header>
 <div id="updateBanner" class="no-print" role="status"><span class="ub-text" onclick="openUpdateModal()">🔄 มีเวอร์ชันใหม่ของ H My Health พร้อมอัปเดต</span><button type="button" id="bannerApply" onclick="openUpdateModal()">อัปเดต</button></div>
-<nav class="tabbar no-print" aria-label="เมนูหลัก"><button type="button" id="tab-home" onclick="show('home')"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg><span>หน้าหลัก</span></button><button type="button" id="tab-history" onclick="show('history')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span>ประวัติ</span></button><button type="button" id="tab-entry" class="tab-fab" onclick="show('entry')"><i class="fab"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></i><span>บันทึก</span></button><button type="button" id="tab-report" onclick="show('reportView')"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 18v-3M12 18v-5M15 18v-2"/></svg><span>รายงาน</span></button><button type="button" id="tab-more" onclick="openMore()"><svg viewBox="0 0 24 24"><circle class="f" cx="5" cy="12" r="2"/><circle class="f" cx="12" cy="12" r="2"/><circle class="f" cx="19" cy="12" r="2"/></svg><span>เพิ่มเติม</span><b class="dot" id="moreDot"></b></button></nav>
-<div id="moreSheet" class="no-print" onclick="if(event.target===this)closeMore()"><div class="more-box" role="dialog" aria-label="เมนูเพิ่มเติม"><div class="more-grip"></div><h3>เมนูเพิ่มเติม</h3><button type="button" class="more-item" onclick="show('profile')"><span class="mi">👤</span><span>ผู้ใช้งาน<small>ข้อมูลส่วนตัว ยา ข้อมูลฉุกเฉิน</small></span></button><button type="button" class="more-item" onclick="show('appointments')"><span class="mi">📅</span><span>นัดตรวจ<small>วัน เวลา และการเตือนล่วงหน้า</small></span></button><button type="button" class="more-item" onclick="show('settings')"><span class="mi">⚙️</span><span>ตั้งค่า<small>เกณฑ์เฝ้าระวัง PIN สำรองข้อมูล</small></span></button><button type="button" class="more-item" onclick="show('guide')"><span class="mi">📖</span><span>วิธีใช้งาน<small>คู่มือพร้อมภาพประกอบ</small></span></button><button type="button" class="more-item" onclick="show('developer')"><span class="mi">🧑‍⚕️</span><span>ผู้พัฒนา<span class="new-badge">ใหม่</span><small>ข้อมูลผู้จัดทำและตรวจสอบอัปเดต</small></span></button></div></div>
+<nav class="tabbar no-print" aria-label="เมนูหลัก"><button type="button" id="tab-home" onclick="show('home')"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg><span>หน้าหลัก</span></button><button type="button" id="tab-history" onclick="show('history')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><span>ประวัติ</span></button><button type="button" id="tab-profile" onclick="show('profile')"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 20c.8-4 3.7-6 7.5-6s6.7 2 7.5 6"/></svg><span>ผู้ใช้งาน</span></button><button type="button" id="tab-entry" class="tab-fab" onclick="show('entry')"><i class="fab"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></i><span>บันทึก</span></button><button type="button" id="tab-report" onclick="show('reportView')"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 18v-3M12 18v-5M15 18v-2"/></svg><span>รายงาน</span></button><button type="button" id="tab-appointments" onclick="show('appointments')"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2.5"/><path d="M4 10h16M8.5 3v4M15.5 3v4"/></svg><span>นัดตรวจ</span></button><button type="button" id="tab-more" onclick="openMore()"><svg viewBox="0 0 24 24"><circle class="f" cx="5" cy="12" r="2"/><circle class="f" cx="12" cy="12" r="2"/><circle class="f" cx="19" cy="12" r="2"/></svg><span>เพิ่มเติม</span><b class="dot" id="moreDot"></b></button></nav>
+<div id="moreSheet" class="no-print" onclick="if(event.target===this)closeMore()"><div class="more-box" role="dialog" aria-label="เมนูเพิ่มเติม"><div class="more-grip"></div><h3>เมนูเพิ่มเติม</h3><button type="button" class="more-item" onclick="show('settings')"><span class="mi">⚙️</span><span>ตั้งค่า<small>เกณฑ์เฝ้าระวัง PIN สำรองข้อมูล</small></span></button><button type="button" class="more-item" onclick="show('guide')"><span class="mi">📖</span><span>วิธีใช้งาน<small>คู่มือพร้อมภาพประกอบ</small></span></button><button type="button" class="more-item" onclick="show('developer')"><span class="mi">🧑‍⚕️</span><span>ผู้พัฒนา<span class="new-badge">ใหม่</span><small>ข้อมูลผู้จัดทำและตรวจสอบอัปเดต</small></span></button></div></div>
 <div id="installPanel" class="card no-print" style="margin:12px 14px;padding:13px;border:2px solid #b8d8f5;display:none">
  <div style="font-weight:800;font-size:18px">📲 ติดตั้ง H My Health ลงเครื่อง</div>
  <div id="installHelp" class="small" style="margin:5px 0 9px">ติดตั้งเพื่อเพิ่มไอคอนไว้ที่หน้าจอ แล้วแตะเข้าใช้งานได้สะดวก</div>
@@ -397,6 +416,8 @@ nav.tabbar .tab-fab.active span{color:var(--navy)}
   <span class="privacy-badge">ออฟไลน์เป็นหลัก · เก็บข้อมูลในอุปกรณ์นี้</span>
   <p>แอปไม่ส่งข้อมูลสุขภาพไปยังเซิร์ฟเวอร์หรือระบบคลาวด์ การสำรองข้อมูลจะบันทึกเป็นไฟล์ลงในอุปกรณ์ที่ผู้ใช้เลือกเอง</p>
   <div class="security-actions"><button class="blue" onclick="setupPin()">ตั้ง / เปลี่ยน PIN</button><button class="light" onclick="lockApp()">ล็อกแอปทันที</button></div>
+  <div class="security-actions"><button class="primary" id="bioToggleBtn" onclick="toggleBio()">👆 เปิดสแกนลายนิ้วมือ</button><button class="light" onclick="testBio()">ทดสอบสแกน</button></div>
+  <p class="bio-status" id="bioStatus"></p>
   <div class="security-actions"><button class="primary" onclick="exportBackup()">สำรองข้อมูลทั้งหมด</button><button class="light" onclick="document.getElementById('restoreFile').click()">กู้คืนจากไฟล์</button></div>
   <input id="restoreFile" type="file" accept="application/json,.json" style="display:none" onchange="restoreBackup(event)">
   <p>เก็บไฟล์สำรองไว้ในที่ปลอดภัย และอย่าแชร์ให้ผู้อื่น ไฟล์สำรองมีข้อมูลสุขภาพส่วนบุคคล</p>
@@ -437,7 +458,7 @@ nav.tabbar .tab-fab.active span{color:var(--navy)}
 <script>
 const $=id=>document.getElementById(id); let records=JSON.parse(localStorage.getItem('records')||'[]'); records=records.map((r,i)=>({...r,id:r.id||('legacy-'+i+'-'+String(r.iso||''))})); localStorage.setItem('records',JSON.stringify(records));
 $('headerDate').textContent=new Date().toLocaleDateString('th-TH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-function show(id){['home','entry','history','settings','reportView','profile','developer','appointments','guide'].forEach(x=>$(x).classList.toggle('hidden',x!==id));if(id==='history')renderHistory();if(id==='appointments')renderAppointments();if(id==='guide')renderGuide();if(id==='profile'){loadProfile();renderMedications();renderMedicationLog();renderAllergyHistory();}if(id==='settings'){loadLimits();}if(id==='home')renderHome();if(id==='reportView'){if(!$('reportDate').value)$('reportDate').value=localDateKey(new Date());renderReport();}}
+function show(id){['home','entry','history','settings','reportView','profile','developer','appointments','guide'].forEach(x=>$(x).classList.toggle('hidden',x!==id));if(id==='history')renderHistory();if(id==='appointments')renderAppointments();if(id==='guide')renderGuide();if(id==='profile'){loadProfile();renderMedications();renderMedicationLog();renderAllergyHistory();}if(id==='settings'){loadLimits();if(window.refreshBioUI)refreshBioUI();}if(id==='home')renderHome();if(id==='reportView'){if(!$('reportDate').value)$('reportDate').value=localDateKey(new Date());renderReport();}}
 function num(id){return $(id).value===''?null:Number($(id).value)}
 function showHealthAlert(msg){$('healthAlertText').innerHTML='<p>'+String(msg).split('；').map(escapeHTML).join('</p><p>')+'</p>';$('healthAlertModal').classList.add('open');$('healthAlertModal').focus();}
 function closeHealthAlert(){$('healthAlertModal').classList.remove('open');}
@@ -506,8 +527,42 @@ function restoreBackup(ev){const file=ev.target.files&&ev.target.files[0];if(!fi
 async function pinHash(pin,salt){const bytes=new TextEncoder().encode(salt+':'+pin);if(window.crypto&&crypto.subtle){const digest=await crypto.subtle.digest('SHA-256',bytes);return Array.from(new Uint8Array(digest)).map(x=>x.toString(16).padStart(2,'0')).join('')}return btoa(unescape(encodeURIComponent(salt+':'+pin)));}
 async function setupPin(){const pin=prompt('ตั้งรหัส PIN 6 หลัก (กด ยกเลิก หากไม่ต้องการใช้)');if(pin===null)return;if(!/^\d{6}$/.test(pin)){alert('กรุณาตั้ง PIN เป็นตัวเลข 6 หลัก');return;}const again=prompt('กรอกรหัส PIN ซ้ำอีกครั้ง');if(again!==pin){alert('รหัส PIN ไม่ตรงกัน');return;}const salt=window.crypto&&window.crypto.getRandomValues?Array.from(window.crypto.getRandomValues(new Uint8Array(16))).map(x=>x.toString(16).padStart(2,'0')).join(''):String(Date.now());localStorage.setItem('appPin',JSON.stringify({salt,hash:await pinHash(pin,salt)}));alert('ตั้ง PIN แล้ว จะขอ PIN เมื่อเปิดแอปครั้งถัดไป');}
 function lockApp(){showPinGate();}
-function showPinGate(){if(!localStorage.getItem('appPin')||document.getElementById('pinGate'))return;const d=document.createElement('div');d.id='pinGate';d.className='pin-overlay';d.innerHTML='<div class="pin-box"><h2>🔐 H My Health</h2><p>กรอกรหัส PIN 6 หลักเพื่อเปิดข้อมูลสุขภาพ</p><input id="unlockPin" type="password" inputmode="numeric" maxlength="6" autocomplete="off"><button class="primary" id="unlockBtn">ปลดล็อก</button><p id="pinError" style="color:#b42318"></p></div>';document.body.appendChild(d);document.getElementById('unlockBtn').onclick=async()=>{const saved=JSON.parse(localStorage.getItem('appPin')||'{}'),v=document.getElementById('unlockPin').value;if(await pinHash(v,saved.salt)===saved.hash)d.remove();else document.getElementById('pinError').textContent='PIN ไม่ถูกต้อง'};document.getElementById('unlockPin').focus();}
-window.addEventListener('load',()=>{if(localStorage.getItem('appPin'))showPinGate()});document.addEventListener('visibilitychange',()=>{if(document.hidden&&localStorage.getItem('appPin'))window.__mhrHiddenAt=Date.now();else if(!document.hidden&&window.__mhrHiddenAt&&Date.now()-window.__mhrHiddenAt>60000){const g=document.getElementById('pinGate');if(g)g.remove();showPinGate();}});
+
+/* ===== V12.3 fingerprint unlock (WebAuthn platform authenticator, on-device only) ===== */
+function b64u(buf){return btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function b64uToBuf(str){str=str.replace(/-/g,'+').replace(/_/g,'/');while(str.length%4)str+='=';const bin=atob(str);return Uint8Array.from(bin,c=>c.charCodeAt(0))}
+function isLocked(){return !!(localStorage.getItem('appPin')||localStorage.getItem('appBio'))}
+async function bioSupported(){try{return !!(window.PublicKeyCredential&&window.isSecureContext&&await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable())}catch(e){return false}}
+async function bioRegister(){
+ const id=crypto.getRandomValues(new Uint8Array(16));
+ const cred=await navigator.credentials.create({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),rp:{name:'H My Health'},user:{id,name:'h-my-health-user',displayName:'ผู้ใช้ H My Health'},pubKeyCredParams:[{type:'public-key',alg:-7},{type:'public-key',alg:-257}],authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required',residentKey:'discouraged'},timeout:60000,attestation:'none'}});
+ localStorage.setItem('appBio',b64u(cred.rawId));
+}
+async function bioVerify(){
+ const raw=localStorage.getItem('appBio');if(!raw)return false;
+ try{const r=await navigator.credentials.get({publicKey:{challenge:crypto.getRandomValues(new Uint8Array(32)),allowCredentials:[{type:'public-key',id:b64uToBuf(raw),transports:['internal']}],userVerification:'required',timeout:60000}});return !!r}catch(e){return false}
+}
+function refreshBioUI(){
+ const b=document.getElementById('bioToggleBtn'),st=document.getElementById('bioStatus');if(!b||!st)return;
+ const on=!!localStorage.getItem('appBio');
+ b.textContent=on?'👆 ปิดสแกนลายนิ้วมือ':'👆 เปิดสแกนลายนิ้วมือ';
+ st.textContent=on?'สถานะ: เปิดใช้งาน — เปิดแอปแล้วสแกนลายนิ้วมือเพื่อปลดล็อก (ใช้ PIN แทนได้หากตั้งไว้)':'สถานะ: ปิดอยู่ — ใช้ลายนิ้วมือที่ตั้งไว้ในเครื่องเพื่อปลดล็อกแอป';
+}
+async function toggleBio(){
+ if(localStorage.getItem('appBio')){if(confirm('ปิดการสแกนลายนิ้วมือ?')){localStorage.removeItem('appBio');refreshBioUI();}return;}
+ if(!(await bioSupported())){alert('เครื่องหรือเบราว์เซอร์นี้ไม่รองรับการสแกนลายนิ้วมือ\n\nต้องเปิดแอปผ่าน https (เช่น GitHub Pages) และตั้งค่าลายนิ้วมือ/ล็อกหน้าจอในเครื่องไว้ก่อน');return;}
+ try{await bioRegister();refreshBioUI();alert('เปิดสแกนลายนิ้วมือแล้ว\nแนะนำให้ตั้ง PIN สำรองไว้ด้วย เผื่อสแกนไม่ได้');}
+ catch(e){alert('ตั้งค่าสแกนลายนิ้วมือไม่สำเร็จ หรือถูกยกเลิก');}
+}
+async function testBio(){
+ if(!localStorage.getItem('appBio')){alert('ยังไม่ได้เปิดสแกนลายนิ้วมือ');return;}
+ alert((await bioVerify())?'✅ สแกนสำเร็จ':'❌ สแกนไม่สำเร็จ');
+}
+function showPinGate(){if(!isLocked()||document.getElementById('pinGate'))return;const hasPin=!!localStorage.getItem('appPin'),hasBio=!!localStorage.getItem('appBio');const d=document.createElement('div');d.id='pinGate';d.className='pin-overlay';d.innerHTML='<div class="pin-box"><h2>🔐 H My Health</h2>'+(hasBio?'<button class="bio-btn" id="bioUnlockBtn" type="button">👆 สแกนลายนิ้วมือ</button>':'')+(hasPin?'<p>'+(hasBio?'หรือกรอก':'กรอก')+'รหัส PIN 6 หลักเพื่อเปิดข้อมูลสุขภาพ</p><input id="unlockPin" type="password" inputmode="numeric" maxlength="6" autocomplete="off"><button class="primary" id="unlockBtn">ปลดล็อก</button>':'<p>สแกนลายนิ้วมือเพื่อเปิดข้อมูลสุขภาพ</p>')+'<p id="pinError" style="color:#b42318"></p></div>';document.body.appendChild(d);
+ if(hasPin){document.getElementById('unlockBtn').onclick=async()=>{const saved=JSON.parse(localStorage.getItem('appPin')||'{}'),v=document.getElementById('unlockPin').value;if(await pinHash(v,saved.salt)===saved.hash)d.remove();else document.getElementById('pinError').textContent='PIN ไม่ถูกต้อง'};if(!hasBio)document.getElementById('unlockPin').focus();}
+ if(hasBio){const go=async()=>{if(await bioVerify())d.remove();else document.getElementById('pinError').textContent='สแกนไม่สำเร็จ ลองอีกครั้ง'+(hasPin?' หรือใช้ PIN':'')};document.getElementById('bioUnlockBtn').onclick=go;setTimeout(go,350);}
+}
+window.addEventListener('load',()=>{if(isLocked())showPinGate();refreshBioUI()});document.addEventListener('visibilitychange',()=>{if(document.hidden&&isLocked())window.__mhrHiddenAt=Date.now();else if(!document.hidden&&window.__mhrHiddenAt&&Date.now()-window.__mhrHiddenAt>60000){const g=document.getElementById('pinGate');if(g)g.remove();showPinGate();}});
 function localDateKey(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 function recordDateKey(r){
  if(r.iso){const d=new Date(r.iso);if(!isNaN(d))return localDateKey(d);}
@@ -795,7 +850,7 @@ if('serviceWorker' in navigator && (location.protocol==='https:'||location.hostn
 function openMore(){$('moreSheet').classList.add('open');}
 function closeMore(){const s=$('moreSheet');if(s)s.classList.remove('open');}
 function syncTabs(id){
- const map={home:'home',history:'history',entry:'entry',reportView:'report'};
+ const map={home:'home',history:'history',entry:'entry',reportView:'report',profile:'profile',appointments:'appointments'};
  const active='tab-'+(map[id]||'more');
  document.querySelectorAll('nav.tabbar button').forEach(b=>b.classList.toggle('active',b.id===active));
 }
